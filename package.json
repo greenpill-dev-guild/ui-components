@@ -64,7 +64,8 @@
     "vite": "^5.4.1"
   },
   "engines": {
-    "node": ">=21.x",
-    "pnpm": ">=9.x"
-  }
+    "node": ">=22.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.13.2"
 }
