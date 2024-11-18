@@ -24,7 +24,8 @@ jobs:
 
       # Install dependencies with pnpm
       - uses: pnpm/action-setup@v4
-        run_install: true
+        with:
+          run_install: true
 
       # Publish to GitHub Package Registry (prepublish script will run automatically)
       - name: Publish to GitHub Package Registry

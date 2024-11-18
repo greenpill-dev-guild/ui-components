@@ -24,7 +24,8 @@ jobs:
           node-version: 23
       # Install dependencies with pnpm
       - uses: pnpm/action-setup@v4
-        run_install: true
+        with:
+          run_install: true
 
       #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
