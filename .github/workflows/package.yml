@@ -19,7 +19,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 23 # Specify the Node.js version you use
+          node-version: 23.x # Specify the Node.js version you use
           registry-url: https://npm.pkg.github.com
 
       # Install dependencies with pnpm

@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 23
+          node-version: 23.x
       # Install dependencies with pnpm
       - uses: pnpm/action-setup@v4
         with:
