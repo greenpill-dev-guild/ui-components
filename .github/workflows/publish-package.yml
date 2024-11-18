@@ -1,0 +1,47 @@
+name: Publish Package on Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    if: startsWith(github.ref, 'refs/heads/release/')
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js and pnpm
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 23 # Specify the Node.js version you use
+          registry-url: https://npm.pkg.github.com
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Install dependencies with pnpm
+      - name: Install dependencies
+        run: pnpm install
+
+      # Publish to GitHub Package Registry (prepublish script will run automatically)
+      - name: Publish to GitHub Package Registry
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm publish
+
+      # Extract version from branch name and create a tag
+      - name: Create version tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Extract version (e.g., x.x.x) from branch name 'release/x.x.x'
+          VERSION=$(echo "${{ github.ref_name }}" | sed 's/release\///')
+          echo "Creating tag for version: $VERSION"
+          git tag -a "$VERSION" -m "Release $VERSION"
+          git push origin "$VERSION"

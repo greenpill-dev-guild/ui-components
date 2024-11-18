@@ -8,13 +8,14 @@
     "dist"
   ],
   "publishConfig": {
+    "access": "public",
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "lint": "eslint .",
     "build": "node esbuild.config.js",
-    "build:storybook": "storybook build",
+    "build-storybook": "storybook build",
     "prepublish": "pnpm run build"
   },
   "dependencies": {
