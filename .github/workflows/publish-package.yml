@@ -13,21 +13,17 @@ jobs:
     steps:
       # Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Set up Node.js and pnpm
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 23 # Specify the Node.js version you use
           registry-url: https://npm.pkg.github.com
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       # Install dependencies with pnpm
-      - name: Install dependencies
-        run: pnpm install
+      - uses: pnpm/action-setup@v4
 
       # Publish to GitHub Package Registry (prepublish script will run automatically)
       - name: Publish to GitHub Package Registry
