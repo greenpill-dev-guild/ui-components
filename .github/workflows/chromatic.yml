@@ -28,7 +28,7 @@ jobs:
 
       # Install dependencies with pnpm
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
 
       #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
