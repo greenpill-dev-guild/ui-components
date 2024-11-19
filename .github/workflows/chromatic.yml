@@ -1,7 +1,7 @@
 # .github/workflows/chromatic.yml
 
 # Workflow name
-name: "Deploy Storybook Website"
+name: "Deploy Storybook to Chromatic"
 
 # Event for the workflow
 on:
@@ -22,10 +22,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 23.x
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       # Install dependencies with pnpm
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: true
+      - name: Install dependencies
+        run: pnpm install
 
       #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
