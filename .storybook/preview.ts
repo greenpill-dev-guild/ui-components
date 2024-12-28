@@ -8,7 +8,12 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      toc: true, // 👈 Enables the table of contents
+    },
   },
+  //👇 Enables auto-generated documentation for all stories
+  tags: ["autodocs"],
 };
 
 export default preview;
