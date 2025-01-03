@@ -1,7 +1,6 @@
-import defaultTheme from "tailwindcss/defaultTheme";
-import tailwindcssAnimate from "tailwindcss-animate";
+const defaultTheme = require("tailwindcss/defaultTheme");
 
-export const texts = {
+const texts = {
   "title-h1": [
     "3.5rem",
     {
@@ -180,7 +179,7 @@ export const texts = {
   ],
 };
 
-export const shadows = {
+const shadows = {
   "regular-xs": "0 1px 2px 0 #0a0d1408",
   "regular-sm": "0 2px 4px #1b1c1d0a",
   "regular-md": "0 16px 32px -12px #0e121b1a",
@@ -214,7 +213,7 @@ export const shadows = {
   tooltip: ["0 12px 24px 0 #0e121b0f", "0 1px 2px 0 #0e121b08"],
 };
 
-export const borderRadii = {
+const borderRadii = {
   10: ".625rem",
   20: "1.25rem",
 };
@@ -222,7 +221,7 @@ export const borderRadii = {
 /** @type {import('tailwindcss').Config} */
 export default {
   // darkMode: "class",
-  safelist: [".dark"],
+  // safelist: [".dark"],
   content: ["./.storybook/**/*.{js,jsx,ts,tsx}", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
