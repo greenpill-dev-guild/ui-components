@@ -221,12 +221,12 @@
     --social-amazon: 53 62 71;
     --social-zendesk: 22 20 13;
 
-    --primary-dark: var(--blue-800);
-    --primary-darker: var(--blue-700);
-    --primary-base: var(--blue-500);
-    --primary-alpha-24: var(--blue-alpha-24);
-    --primary-alpha-16: var(--blue-alpha-16);
-    --primary-alpha-10: var(--blue-alpha-10);
+    --primary-dark: var(--green-800);
+    --primary-darker: var(--green-700);
+    --primary-base: var(--green-500);
+    --primary-alpha-24: var(--green-alpha-24);
+    --primary-alpha-16: var(--green-alpha-16);
+    --primary-alpha-10: var(--green-alpha-10);
 
     --static-black: var(--neutral-950);
     --static-white: var(--neutral-0);
