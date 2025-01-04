@@ -15,10 +15,12 @@ const meta = {
   tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
+    title: { control: "text" },
+    tags: { control: "text" },
+    issues: { control: "text" },
+    assessmentData: { control: "text" },
+    publishedDate: { control: "date" },
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
 } satisfies Meta<typeof AssessmentCard>;
 
 export default meta;
@@ -27,34 +29,10 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
   args: {
-    primary: true,
-    label: "AssessmentCard",
-  },
-};
-
-export const Secondary: Story = {
-  args: {
-    label: "AssessmentCard",
-  },
-};
-
-export const Large: Story = {
-  args: {
-    size: "large",
-    label: "AssessmentCard",
-  },
-};
-
-export const Small: Story = {
-  args: {
-    size: "small",
-    label: "AssessmentCard",
-  },
-};
-
-export const Card: Story = {
-  args: {
-    primary: false,
-    label: "AssessmentCard",
+    title: "Assessment Title",
+    tags: ["Urban Farming", "Educational", "Public", "+4"],
+    issues: ["Soil Quality", "Plant Health", "Fertilization", "+6"],
+    assessmentData: ["21", "-", "1.9 T", "3.8 T"],
+    publishedDate: new Date(),
   },
 };
