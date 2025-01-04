@@ -30,26 +30,27 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Compact: Story = {
-  args: {
-    variant: "compact",
-    title: "GardenCard",
-    coverImage: "https://picsum.photos/200/300",
-    description: "Lorem ipsum dolor sit amet",
-    gardenerCount: 10,
-    gardenOperators: ["John Doe", "Jane Doe"],
-    location: "New York",
-  },
-};
 
 export const Full: Story = {
   args: {
-    variant: "full",
-    title: "GardenCard",
+    size: "default",
+    title: "Public Lettuce Garden",
     coverImage: "https://picsum.photos/200/300",
-    description: "Lorem ipsum dolor sit amet",
+    description: "We are building a lettuce garden for all locals having a organic and natural food easy and cheap",
     gardenerCount: 10,
-    gardenOperators: ["John Doe", "Jane Doe"],
+    gardenOperators: ["afowefa.eth", "marcin.eth"],
     location: "Brasil",
+  },
+};
+
+export const Compact: Story = {
+  args: {
+    size: "compact",
+    title: "Public Lettuce Garden",
+    coverImage: "https://picsum.photos/200/300",
+    description: "We are building a lettuce garden for all locals having a organic and natural food easy and cheap",
+    gardenerCount: 10,
+    gardenOperators: ["afowefa.eth", "marcin.eth"],
+    location: "New York",
   },
 };
