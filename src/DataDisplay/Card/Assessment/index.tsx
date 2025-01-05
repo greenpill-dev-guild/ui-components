@@ -71,22 +71,22 @@ export const AssessmentCard = ({
             </div>
             <div className="inline-flex items-start justify-start gap-1 self-stretch">
               <div className="flex items-center justify-center gap-0.5 overflow-hidden whitespace-nowrap rounded-[999px] bg-[#c0eaff] px-2 py-0.5">
-                <div className="text-label-sm leading-none text-[#124b68]">
+                <div className="text-label-sm leading-none text-verified-dark">
                   {issues[0]}
                 </div>
               </div>
               <div className="flex items-center justify-center gap-0.5 overflow-hidden whitespace-nowrap rounded-[999px] bg-[#c0eaff] px-2 py-0.5">
-                <div className="text-label-sm leading-none text-[#124b68]">
+                <div className="text-label-sm leading-none text-verified-dark">
                   {issues[1]}
                 </div>
               </div>
               <div className="flex items-center justify-center gap-0.5 overflow-hidden whitespace-nowrap rounded-[999px] bg-[#c0eaff] px-2 py-0.5">
-                <div className="text-label-sm leading-none text-[#124b68]">
+                <div className="text-label-sm leading-none text-verified-dark">
                   {issues[2]}
                 </div>
               </div>
               <div className="flex items-center justify-center gap-0.5 overflow-hidden whitespace-nowrap rounded-[999px] bg-[#c0eaff] px-2 py-0.5">
-                <div className="text-label-sm leading-none text-[#124b68]">
+                <div className="text-label-sm leading-none text-verified-dark">
                   {issues[3]}
                 </div>
               </div>

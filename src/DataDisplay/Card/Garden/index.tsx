@@ -81,7 +81,7 @@ export const GardenCard = ({
                   />
                 </div>
                 <div className="text-label-xs text-text-sub-600">
-                {gardenOperators[1]}
+                  {gardenOperators[1]}
                 </div>
               </div>
             </div>
