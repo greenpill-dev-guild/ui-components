@@ -20,6 +20,6 @@
 1. Link all colors unliked to the Design System tokens using ⌘+Fn+F2
     e.g: "text-#000000" -> "text-text-strong-950"
 2. Link all fonts to the Design System tokens using ⌘+Fn+F2
-    e.g: "text-text-strong-950 text-base font-medium font-['Inter'] leading-normal" -> "text-text-strong-950 text-label-md"
+    e.g: "text-base font-medium font-['Inter'] leading-normal" -> "text-label-md"
 3. Set all the icons right with Remix Icons components
 4. Make the Tailwind proprieties equal Auto-layout on Figma
