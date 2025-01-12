@@ -124,7 +124,7 @@ export const AssessmentCard = ({
           <div className="inline-flex items-center justify-start gap-1">
             <RiCloudLine className="h-4 w-4 text-primary-base" />
             <div className="text-label-sm leading-none text-text-sub-600">
-              Carbon Ton Stock
+              Carbon Stock
             </div>
           </div>
           <div className="self-stretch font-['Inter'] text-base font-medium leading-normal text-[#0d111b]">
@@ -135,7 +135,7 @@ export const AssessmentCard = ({
           <div className="inline-flex items-center justify-start gap-1">
             <RiCloudLine className="h-4 w-4 text-primary-base" />
             <div className="text-label-sm leading-none text-text-sub-600">
-              Carbon Ton Potential
+              Carbon Potential
             </div>
           </div>
           <div className="self-stretch font-['Inter'] text-base font-medium leading-normal text-[#0d111b]">
