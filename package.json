@@ -14,7 +14,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "lint": "eslint .",
-    "build": "node esbuild.config.js",
+    "build": "node esbuild.config.cjs",
     "build-storybook": "storybook build",
     "prepublish": "pnpm run build"
   },
