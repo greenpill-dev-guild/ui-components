@@ -1,279 +1,103 @@
-// AlignUI Button v0.0.0
+// AlignUI ButtonGroup v0.0.0
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 
-import type { PolymorphicComponentProps } from "../../utils/polymorphic";
+import { PolymorphicComponentProps } from "../../utils/polymorphic";
 import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
 import { tv, type VariantProps } from "../../utils/tv";
 
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+const BUTTON_GROUP_ROOT_NAME = "ButtonGroupRoot";
+const BUTTON_GROUP_ITEM_NAME = "ButtonGroupItem";
+const BUTTON_GROUP_ICON_NAME = "ButtonGroupIcon";
 
-export const buttonVariants = tv({
+export const buttonGroupVariants = tv({
   slots: {
-    root: [
+    root: "flex -space-x-[1.5px]",
+    item: [
       // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
+      "group relative flex items-center justify-center whitespace-nowrap bg-bg-white-0 text-center text-text-sub-600 outline-none",
+      "border border-stroke-soft-200",
       "transition duration-200 ease-out",
+      // hover
+      "hover:bg-bg-weak-50",
       // focus
-      "focus:outline-none",
+      "focus:bg-bg-weak-50 focus:outline-none",
+      // active
+      "data-[state=on]:bg-bg-weak-50",
+      "data-[state=on]:text-text-strong-950",
       // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      "disabled:pointer-events-none disabled:bg-bg-weak-50",
+      "disabled:text-text-disabled-300",
     ],
-    icon: [
-      // base
-      "flex size-5 shrink-0 items-center justify-center",
-    ],
+    icon: "shrink-0",
   },
   variants: {
-    variant: {
-      primary: {},
-      neutral: {},
-      error: {},
-    },
-    mode: {
-      filled: {},
-      stroke: {
-        root: "ring-1 ring-inset",
-      },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
-      },
-    },
     size: {
-      medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
-        icon: "-mx-1",
-      },
       small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
+        item: [
+          // base
+          "h-9 gap-4 px-4 text-label-sm",
+          // radius
+          "first:rounded-l-lg last:rounded-r-lg",
+        ],
+        icon: [
+          // base
+          "-mx-2 size-5",
+        ],
       },
       xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
+        item: [
+          // base
+          "h-8 gap-3.5 px-3.5 text-label-sm",
+          // radius
+          "first:rounded-l-lg last:rounded-r-lg",
+        ],
+        icon: [
+          // base
+          "-mx-2 size-5",
+        ],
       },
       xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
-        icon: "-mx-1",
+        item: [
+          // base
+          "h-6 gap-3 px-3 text-label-xs",
+          // radius
+          "first:rounded-l-md last:rounded-r-md",
+        ],
+        icon: [
+          // base
+          "-mx-2 size-4",
+        ],
       },
     },
   },
-  compoundVariants: [
-    //#region variant=primary
-    {
-      variant: "primary",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-primary-base text-static-white",
-          // hover
-          "hover:bg-primary-darker",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
-          // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-primary-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-primary-alpha-10",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-error-base text-static-white",
-          // hover
-          "hover:bg-red-700",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-error-base ring-error-base bg-bg-white-0",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
-          // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    //#endregion
-  ],
   defaultVariants: {
-    variant: "primary",
-    mode: "filled",
-    size: "medium",
+    size: "small",
   },
 });
 
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
+type ButtonGroupSharedProps = VariantProps<typeof buttonGroupVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type ButtonGroupRootProps = VariantProps<typeof buttonGroupVariants> &
+  React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
   };
 
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
-  (
-    { children, variant, mode, size, asChild, className, ...rest },
-    forwardedRef,
-  ) => {
+const ButtonGroupRoot = React.forwardRef<HTMLDivElement, ButtonGroupRootProps>(
+  ({ asChild, children, className, size, ...rest }, forwardedRef) => {
     const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
+    const Component = asChild ? Slot : "div";
+    const { root } = buttonGroupVariants({ size });
 
-    const sharedProps: ButtonSharedProps = {
-      variant,
-      mode,
+    const sharedProps: ButtonGroupSharedProps = {
       size,
     };
 
     const extendedChildren = recursiveCloneChildren(
       children as React.ReactElement[],
       sharedProps,
-      [BUTTON_ICON_NAME],
+      [BUTTON_GROUP_ITEM_NAME, BUTTON_GROUP_ICON_NAME],
       uniqueId,
       asChild,
     );
@@ -289,21 +113,47 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
     );
   },
 );
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+ButtonGroupRoot.displayName = BUTTON_GROUP_ROOT_NAME;
 
-function ButtonIcon<T extends React.ElementType>({
-  variant,
-  mode,
+type ButtonGroupItemProps = ButtonGroupSharedProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    asChild?: boolean;
+  };
+
+const ButtonGroupItem = React.forwardRef<
+  HTMLButtonElement,
+  ButtonGroupItemProps
+>(({ children, className, size, asChild, ...rest }, forwardedRef) => {
+  const Component = asChild ? Slot : "button";
+  const { item } = buttonGroupVariants({ size });
+
+  return (
+    <Component
+      ref={forwardedRef}
+      className={item({ class: className })}
+      {...rest}
+    >
+      {children}
+    </Component>
+  );
+});
+ButtonGroupItem.displayName = BUTTON_GROUP_ITEM_NAME;
+
+function ButtonGroupIcon<T extends React.ElementType>({
+  className,
   size,
   as,
-  className,
   ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
+}: PolymorphicComponentProps<T, ButtonGroupSharedProps>) {
   const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
+  const { icon } = buttonGroupVariants({ size });
 
   return <Component className={icon({ class: className })} {...rest} />;
 }
-ButtonIcon.displayName = BUTTON_ICON_NAME;
+ButtonGroupIcon.displayName = BUTTON_GROUP_ICON_NAME;
 
-export { ButtonRoot as Root, ButtonIcon as Icon };
+export {
+  ButtonGroupRoot as Root,
+  ButtonGroupItem as Item,
+  ButtonGroupIcon as Icon,
+};

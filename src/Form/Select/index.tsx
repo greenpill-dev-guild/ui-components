@@ -31,7 +31,6 @@ export const Select = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

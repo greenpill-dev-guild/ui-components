@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Root } from "./Base";
+import { Group } from "./Base";
 
 export interface RadioProps {
   /** Is this the principal call to action on the page? */
@@ -24,17 +24,16 @@ export const Radio = ({
   ...props
 }: RadioProps) => {
   return (
-    <Root
+    <Group
       // type="button"
       // className={["storybook-button", `storybook-button--${size}`, mode].join(
       //   " "
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}
-    </Root>
+    </Group>
   );
 };

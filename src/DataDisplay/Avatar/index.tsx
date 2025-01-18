@@ -31,7 +31,6 @@ export const Avatar = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

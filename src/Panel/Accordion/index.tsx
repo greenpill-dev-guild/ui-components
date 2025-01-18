@@ -25,13 +25,13 @@ export const Accordion = ({
 }: AccordionProps) => {
   return (
     <Root
+      type="single"
       // type="button"
       // className={["storybook-button", `storybook-button--${size}`, mode].join(
       //   " "
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

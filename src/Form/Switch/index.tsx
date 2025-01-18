@@ -31,7 +31,6 @@ export const Switch = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

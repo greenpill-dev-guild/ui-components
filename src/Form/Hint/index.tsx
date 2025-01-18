@@ -31,7 +31,6 @@ export const Hint = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

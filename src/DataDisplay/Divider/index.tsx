@@ -31,7 +31,6 @@ export const Divider = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

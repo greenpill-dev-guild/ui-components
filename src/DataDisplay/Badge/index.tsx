@@ -31,7 +31,6 @@ export const Badge = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

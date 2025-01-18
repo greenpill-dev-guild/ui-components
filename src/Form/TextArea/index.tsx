@@ -31,7 +31,6 @@ export const TextArea = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

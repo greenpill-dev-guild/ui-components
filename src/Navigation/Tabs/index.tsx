@@ -31,7 +31,6 @@ export const Tabs = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

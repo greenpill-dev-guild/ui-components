@@ -31,7 +31,6 @@ export const Progress = ({
       // )}
       // style={{ backgroundColor }}
 
-      variant="neutral"
       {...props}
     >
       {label}

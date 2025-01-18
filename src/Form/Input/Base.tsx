@@ -1,4 +1,4 @@
-// AlignUI Button v0.0.0
+// AlignUI Input v0.0.0
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -7,303 +7,310 @@ import type { PolymorphicComponentProps } from "../../utils/polymorphic";
 import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
 import { tv, type VariantProps } from "../../utils/tv";
 
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+const INPUT_ROOT_NAME = "InputRoot";
+const INPUT_WRAPPER_NAME = "InputWrapper";
+const INPUT_EL_NAME = "InputEl";
+const INPUT_ICON_NAME = "InputIcon";
+const INPUT_AFFIX_NAME = "InputAffixButton";
+const INPUT_INLINE_AFFIX_NAME = "InputInlineAffixButton";
 
-export const buttonVariants = tv({
+export const inputVariants = tv({
   slots: {
     root: [
       // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
+      "group relative flex w-full overflow-hidden bg-bg-white-0 text-text-strong-950 shadow-regular-xs",
       "transition duration-200 ease-out",
+      "divide-x divide-stroke-soft-200",
+      // before
+      "before:absolute before:inset-0 before:ring-1 before:ring-inset before:ring-stroke-soft-200",
+      "before:pointer-events-none before:rounded-[inherit]",
+      "before:transition before:duration-200 before:ease-out",
+      // hover
+      "hover:shadow-none",
+      // focus
+      "has-[input:focus]:shadow-button-important-focus has-[input:focus]:before:ring-stroke-strong-950",
+      // disabled
+      "has-[input:disabled]:shadow-none has-[input:disabled]:before:ring-transparent",
+    ],
+    wrapper: [
+      // base
+      "group/input-wrapper flex w-full cursor-text items-center bg-bg-white-0",
+      "transition duration-200 ease-out",
+      // hover
+      "hover:[&:not(&:has(input:focus))]:bg-bg-weak-50",
+      // disabled
+      "has-[input:disabled]:pointer-events-none has-[input:disabled]:bg-bg-weak-50",
+    ],
+    input: [
+      // base
+      "w-full bg-transparent bg-none text-paragraph-sm text-text-strong-950 outline-none",
+      "transition duration-200 ease-out",
+      // placeholder
+      "placeholder:select-none placeholder:text-text-soft-400 placeholder:transition placeholder:duration-200 placeholder:ease-out",
+      // hover placeholder
+      "group-hover/input-wrapper:placeholder:text-text-sub-600",
       // focus
       "focus:outline-none",
+      // focus placeholder
+      "group-has-[input:focus]:placeholder:text-text-sub-600",
       // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      "disabled:text-text-disabled-300 disabled:placeholder:text-text-disabled-300",
     ],
     icon: [
       // base
-      "flex size-5 shrink-0 items-center justify-center",
+      "flex size-5 shrink-0 select-none items-center justify-center",
+      "transition duration-200 ease-out",
+      // placeholder state
+      "group-has-[:placeholder-shown]:text-text-soft-400",
+      // filled state
+      "text-text-sub-600",
+      // hover
+      "group-has-[:placeholder-shown]:group-hover/input-wrapper:text-text-sub-600",
+      // focus
+      "group-has-[:placeholder-shown]:group-has-[input:focus]/input-wrapper:text-text-sub-600",
+      // disabled
+      "group-has-[input:disabled]/input-wrapper:text-text-disabled-300",
+    ],
+    affix: [
+      // base
+      "shrink-0 bg-bg-white-0 text-paragraph-sm text-text-sub-600",
+      "flex items-center justify-center truncate",
+      "transition duration-200 ease-out",
+      // placeholder state
+      "group-has-[:placeholder-shown]:text-text-soft-400",
+      // focus state
+      "group-has-[:placeholder-shown]:group-has-[input:focus]:text-text-sub-600",
+    ],
+    inlineAffix: [
+      // base
+      "text-paragraph-sm text-text-sub-600",
+      // placeholder state
+      "group-has-[:placeholder-shown]:text-text-soft-400",
+      // focus state
+      "group-has-[:placeholder-shown]:group-has-[input:focus]:text-text-sub-600",
     ],
   },
   variants: {
-    variant: {
-      primary: {},
-      neutral: {},
-      error: {},
-    },
-    mode: {
-      filled: {},
-      stroke: {
-        root: "ring-1 ring-inset",
-      },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
-      },
-    },
     size: {
       medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
-        icon: "-mx-1",
+        root: "rounded-10",
+        wrapper: "gap-2 px-3",
+        input: "h-10",
       },
       small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
+        root: "rounded-lg",
+        wrapper: "gap-2 px-2.5",
+        input: "h-9",
       },
       xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
+        root: "rounded-lg",
+        wrapper: "gap-1.5 px-2",
+        input: "h-8",
       },
-      xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
-        icon: "-mx-1",
+    },
+    hasError: {
+      true: {
+        root: [
+          // base
+          "before:ring-error-base",
+          // base
+          "hover:before:ring-error-base hover:[&:not(&:has(input:focus)):has(>:only-child)]:before:ring-error-base",
+          // focus
+          "has-[input:focus]:shadow-button-error-focus has-[input:focus]:before:ring-error-base",
+        ],
+      },
+      false: {
+        root: [
+          // hover
+          "hover:[&:not(:has(input:focus)):has(>:only-child)]:before:ring-transparent",
+        ],
       },
     },
   },
   compoundVariants: [
-    //#region variant=primary
+    //#region affix
     {
-      variant: "primary",
-      mode: "filled",
+      size: "medium",
       class: {
-        root: [
-          // base
-          "bg-primary-base text-static-white",
-          // hover
-          "hover:bg-primary-darker",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
+        affix: "px-3",
       },
     },
     {
-      variant: "primary",
-      mode: "stroke",
+      size: ["small", "xsmall"],
       class: {
-        root: [
-          // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
-          // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-primary-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-primary-alpha-10",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-error-base text-static-white",
-          // hover
-          "hover:bg-red-700",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-error-base ring-error-base bg-bg-white-0",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
-          // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
+        affix: "px-2.5",
       },
     },
     //#endregion
   ],
   defaultVariants: {
-    variant: "primary",
-    mode: "filled",
     size: "medium",
   },
 });
 
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
+type InputSharedProps = VariantProps<typeof inputVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+function InputRoot({
+  className,
+  children,
+  size,
+  hasError,
+  asChild,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> &
+  InputSharedProps & {
     asChild?: boolean;
+  }) {
+  const uniqueId = React.useId();
+  const Component = asChild ? Slot : "div";
+
+  const { root } = inputVariants({
+    size,
+    hasError,
+  });
+
+  const sharedProps: InputSharedProps = {
+    size,
+    hasError,
   };
 
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
+  const extendedChildren = recursiveCloneChildren(
+    children as React.ReactElement[],
+    sharedProps,
+    [
+      INPUT_WRAPPER_NAME,
+      INPUT_EL_NAME,
+      INPUT_ICON_NAME,
+      INPUT_AFFIX_NAME,
+      INPUT_INLINE_AFFIX_NAME,
+    ],
+    uniqueId,
+    asChild,
+  );
+
+  return (
+    <Component className={root({ class: className })} {...rest}>
+      {extendedChildren}
+    </Component>
+  );
+}
+InputRoot.displayName = INPUT_ROOT_NAME;
+
+function InputWrapper({
+  className,
+  children,
+  size,
+  hasError,
+  asChild,
+  ...rest
+}: React.HTMLAttributes<HTMLLabelElement> &
+  InputSharedProps & {
+    asChild?: boolean;
+  }) {
+  const Component = asChild ? Slot : "label";
+
+  const { wrapper } = inputVariants({
+    size,
+    hasError,
+  });
+
+  return (
+    <Component className={wrapper({ class: className })} {...rest}>
+      {children}
+    </Component>
+  );
+}
+InputWrapper.displayName = INPUT_WRAPPER_NAME;
+
+const Input = React.forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement> &
+    InputSharedProps & {
+      asChild?: boolean;
+    }
+>(
   (
-    { children, variant, mode, size, asChild, className, ...rest },
+    { className, type = "text", size, hasError, asChild, ...rest },
     forwardedRef,
   ) => {
-    const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
+    const Component = asChild ? Slot : "input";
 
-    const sharedProps: ButtonSharedProps = {
-      variant,
-      mode,
+    const { input } = inputVariants({
       size,
-    };
-
-    const extendedChildren = recursiveCloneChildren(
-      children as React.ReactElement[],
-      sharedProps,
-      [BUTTON_ICON_NAME],
-      uniqueId,
-      asChild,
-    );
+      hasError,
+    });
 
     return (
       <Component
+        type={type}
+        className={input({ class: className })}
         ref={forwardedRef}
-        className={root({ class: className })}
         {...rest}
-      >
-        {extendedChildren}
-      </Component>
+      />
     );
   },
 );
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+Input.displayName = INPUT_EL_NAME;
 
-function ButtonIcon<T extends React.ElementType>({
-  variant,
-  mode,
+function InputIcon<T extends React.ElementType = "div">({
   size,
+  hasError,
   as,
   className,
   ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
+}: PolymorphicComponentProps<T, InputSharedProps>) {
   const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
+  const { icon } = inputVariants({ size, hasError });
 
   return <Component className={icon({ class: className })} {...rest} />;
 }
-ButtonIcon.displayName = BUTTON_ICON_NAME;
+InputIcon.displayName = INPUT_ICON_NAME;
 
-export { ButtonRoot as Root, ButtonIcon as Icon };
+function InputAffix({
+  className,
+  children,
+  size,
+  hasError,
+  ...rest
+}: React.HTMLAttributes<HTMLDivElement> & InputSharedProps) {
+  const { affix } = inputVariants({
+    size,
+    hasError,
+  });
+
+  return (
+    <div className={affix({ class: className })} {...rest}>
+      {children}
+    </div>
+  );
+}
+InputAffix.displayName = INPUT_AFFIX_NAME;
+
+function InputInlineAffix({
+  className,
+  children,
+  size,
+  hasError,
+  ...rest
+}: React.HTMLAttributes<HTMLSpanElement> & InputSharedProps) {
+  const { inlineAffix } = inputVariants({
+    size,
+    hasError,
+  });
+
+  return (
+    <span className={inlineAffix({ class: className })} {...rest}>
+      {children}
+    </span>
+  );
+}
+InputInlineAffix.displayName = INPUT_INLINE_AFFIX_NAME;
+
+export {
+  InputRoot as Root,
+  InputWrapper as Wrapper,
+  Input,
+  InputIcon as Icon,
+  InputAffix as Affix,
+  InputInlineAffix as InlineAffix,
+};

@@ -1,4 +1,4 @@
-// AlignUI Button v0.0.0
+// AlignUI StatusBadge v0.0.0
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
@@ -7,273 +7,111 @@ import type { PolymorphicComponentProps } from "../../utils/polymorphic";
 import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
 import { tv, type VariantProps } from "../../utils/tv";
 
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+const STATUS_BADGE_ROOT_NAME = "StatusBadgeRoot";
+const STATUS_BADGE_ICON_NAME = "StatusBadgeIcon";
+const STATUS_BADGE_DOT_NAME = "StatusBadgeDot";
 
-export const buttonVariants = tv({
+export const statusBadgeVariants = tv({
   slots: {
     root: [
-      // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
-      "transition duration-200 ease-out",
-      // focus
-      "focus:outline-none",
-      // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      "inline-flex h-6 items-center justify-center gap-2 whitespace-nowrap rounded-md px-2 text-label-xs",
+      "has-[>.dot]:gap-1.5",
     ],
-    icon: [
+    icon: "-mx-1 size-4",
+    dot: [
       // base
-      "flex size-5 shrink-0 items-center justify-center",
+      "dot -mx-1 flex size-4 items-center justify-center",
+      // before
+      "before:size-1.5 before:rounded-full before:bg-current",
     ],
   },
   variants: {
     variant: {
-      primary: {},
-      neutral: {},
-      error: {},
-    },
-    mode: {
-      filled: {},
       stroke: {
-        root: "ring-1 ring-inset",
+        root: "bg-bg-white-0 text-text-sub-600 ring-1 ring-inset ring-stroke-soft-200",
       },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
-      },
+      light: {},
     },
-    size: {
-      medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
-        icon: "-mx-1",
+    status: {
+      completed: {
+        icon: "text-success-base",
+        dot: "text-success-base",
       },
-      small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
+      pending: {
+        icon: "text-warning-base",
+        dot: "text-warning-base",
       },
-      xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
+      failed: {
+        icon: "text-error-base",
+        dot: "text-error-base",
       },
-      xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
-        icon: "-mx-1",
+      disabled: {
+        icon: "text-faded-base",
+        dot: "text-faded-base",
       },
     },
   },
   compoundVariants: [
-    //#region variant=primary
     {
-      variant: "primary",
-      mode: "filled",
+      variant: "light",
+      status: "completed",
       class: {
-        root: [
-          // base
-          "bg-primary-base text-static-white",
-          // hover
-          "hover:bg-primary-darker",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
+        root: "bg-success-lighter text-success-base",
       },
     },
     {
-      variant: "primary",
-      mode: "stroke",
+      variant: "light",
+      status: "pending",
       class: {
-        root: [
-          // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
-          // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
+        root: "bg-warning-lighter text-warning-base",
       },
     },
     {
-      variant: "primary",
-      mode: "lighter",
+      variant: "light",
+      status: "failed",
       class: {
-        root: [
-          // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
+        root: "bg-error-lighter text-error-base",
       },
     },
     {
-      variant: "primary",
-      mode: "ghost",
+      variant: "light",
+      status: "disabled",
       class: {
-        root: [
-          // base
-          "text-primary-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-primary-alpha-10",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
+        root: "bg-faded-lighter text-text-sub-600",
       },
     },
-    //#endregion
-
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-error-base text-static-white",
-          // hover
-          "hover:bg-red-700",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-error-base ring-error-base bg-bg-white-0",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
-          // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    //#endregion
   ],
   defaultVariants: {
-    variant: "primary",
-    mode: "filled",
-    size: "medium",
+    status: "disabled",
+    variant: "stroke",
   },
 });
 
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
+type StatusBadgeSharedProps = VariantProps<typeof statusBadgeVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type StatusBadgeRootProps = React.HTMLAttributes<HTMLDivElement> &
+  VariantProps<typeof statusBadgeVariants> & {
     asChild?: boolean;
   };
 
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
+const StatusBadgeRoot = React.forwardRef<HTMLDivElement, StatusBadgeRootProps>(
   (
-    { children, variant, mode, size, asChild, className, ...rest },
+    { asChild, children, variant, status, className, ...rest },
     forwardedRef,
   ) => {
     const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
+    const Component = asChild ? Slot : "div";
+    const { root } = statusBadgeVariants({ variant, status });
 
-    const sharedProps: ButtonSharedProps = {
+    const sharedProps: StatusBadgeSharedProps = {
       variant,
-      mode,
-      size,
+      status,
     };
 
     const extendedChildren = recursiveCloneChildren(
       children as React.ReactElement[],
       sharedProps,
-      [BUTTON_ICON_NAME],
+      [STATUS_BADGE_ICON_NAME, STATUS_BADGE_DOT_NAME],
       uniqueId,
       asChild,
     );
@@ -289,21 +127,35 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
     );
   },
 );
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+StatusBadgeRoot.displayName = STATUS_BADGE_ROOT_NAME;
 
-function ButtonIcon<T extends React.ElementType>({
+function StatusBadgeIcon<T extends React.ElementType = "div">({
   variant,
-  mode,
-  size,
+  status,
+  className,
   as,
+}: PolymorphicComponentProps<T, StatusBadgeSharedProps>) {
+  const Component = as || "div";
+  const { icon } = statusBadgeVariants({ variant, status });
+
+  return <Component className={icon({ class: className })} />;
+}
+StatusBadgeIcon.displayName = STATUS_BADGE_ICON_NAME;
+
+function StatusBadgeDot({
+  variant,
+  status,
   className,
   ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
-  const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
+}: StatusBadgeSharedProps & React.HTMLAttributes<HTMLDivElement>) {
+  const { dot } = statusBadgeVariants({ variant, status });
 
-  return <Component className={icon({ class: className })} {...rest} />;
+  return <div className={dot({ class: className })} {...rest} />;
 }
-ButtonIcon.displayName = BUTTON_ICON_NAME;
+StatusBadgeDot.displayName = STATUS_BADGE_DOT_NAME;
 
-export { ButtonRoot as Root, ButtonIcon as Icon };
+export {
+  StatusBadgeRoot as Root,
+  StatusBadgeIcon as Icon,
+  StatusBadgeDot as Dot,
+};

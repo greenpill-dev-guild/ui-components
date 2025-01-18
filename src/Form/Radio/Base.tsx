@@ -1,309 +1,133 @@
-// AlignUI Button v0.0.0
+// AlignUI Radio v0.0.0
 
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
-import type { PolymorphicComponentProps } from "../../utils/polymorphic";
-import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
-import { tv, type VariantProps } from "../../utils/tv";
+import { cn, cnExt } from "../../utils/cn";
 
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+const RadioGroup = RadioGroupPrimitive.Root;
+RadioGroup.displayName = "RadioGroup";
 
-export const buttonVariants = tv({
-  slots: {
-    root: [
-      // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
-      "transition duration-200 ease-out",
-      // focus
-      "focus:outline-none",
-      // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
-    ],
-    icon: [
-      // base
-      "flex size-5 shrink-0 items-center justify-center",
-    ],
-  },
-  variants: {
-    variant: {
-      primary: {},
-      neutral: {},
-      error: {},
-    },
-    mode: {
-      filled: {},
-      stroke: {
-        root: "ring-1 ring-inset",
-      },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
-      },
-    },
-    size: {
-      medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
-      },
-      xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
-        icon: "-mx-1",
-      },
-    },
-  },
-  compoundVariants: [
-    //#region variant=primary
-    {
-      variant: "primary",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-primary-base text-static-white",
-          // hover
-          "hover:bg-primary-darker",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
-          // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-primary-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-primary-alpha-10",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    //#endregion
+const RadioGroupItem = React.forwardRef<
+  React.ComponentRef<typeof RadioGroupPrimitive.Item>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+>(({ className, ...rest }, forwardedRef) => {
+  const filterId = React.useId();
 
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-error-base text-static-white",
-          // hover
-          "hover:bg-red-700",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-error-base ring-error-base bg-bg-white-0",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
-          // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    //#endregion
-  ],
-  defaultVariants: {
-    variant: "primary",
-    mode: "filled",
-    size: "medium",
-  },
-});
-
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
-
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
-    asChild?: boolean;
-  };
-
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
-  (
-    { children, variant, mode, size, asChild, className, ...rest },
-    forwardedRef,
-  ) => {
-    const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
-
-    const sharedProps: ButtonSharedProps = {
-      variant,
-      mode,
-      size,
-    };
-
-    const extendedChildren = recursiveCloneChildren(
-      children as React.ReactElement[],
-      sharedProps,
-      [BUTTON_ICON_NAME],
-      uniqueId,
-      asChild,
-    );
-
-    return (
-      <Component
-        ref={forwardedRef}
-        className={root({ class: className })}
-        {...rest}
+  return (
+    <RadioGroupPrimitive.Item
+      ref={forwardedRef}
+      className={cnExt(
+        "group/radio relative size-5 shrink-0 outline-none focus:outline-none",
+        className,
+      )}
+      {...rest}
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={cn([
+          "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+        ])}
       >
-        {extendedChildren}
-      </Component>
-    );
-  },
-);
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+        <circle
+          cx="10"
+          cy="10"
+          r="8"
+          className={cn(
+            "fill-bg-soft-200 transition duration-200 ease-out",
+            // hover
+            "group-hover/radio:fill-bg-sub-300",
+            // focus
+            "group-focus/radio:fill-primary-base",
+            // disabled
+            "group-disabled/radio:fill-bg-soft-200",
+            // disabled chcked
+            "group-data-[state=checked]/radio:fill-bg-white-0",
+          )}
+        />
+        <g filter={`url(#${filterId})`}>
+          <circle
+            cx="10"
+            cy="10"
+            r="6.5"
+            className={cn(
+              "fill-bg-white-0",
+              // disabled
+              "group-disabled/radio:hidden",
+            )}
+          />
+        </g>
+        <defs>
+          <filter
+            id={filterId}
+            x="1.5"
+            y="3.5"
+            width="17"
+            height="17"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feColorMatrix
+              in="SourceAlpha"
+              type="matrix"
+              values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+              result="hardAlpha"
+            />
+            <feOffset dy="2" />
+            <feGaussianBlur stdDeviation="1" />
+            <feColorMatrix
+              type="matrix"
+              values="0 0 0 0 0.105882 0 0 0 0 0.109804 0 0 0 0 0.113725 0 0 0 0.12 0"
+            />
+            <feBlend
+              mode="normal"
+              in2="BackgroundImageFix"
+              result="effect1_dropShadow_515_4243"
+            />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="effect1_dropShadow_515_4243"
+              result="shape"
+            />
+          </filter>
+        </defs>
+      </svg>
 
-function ButtonIcon<T extends React.ElementType>({
-  variant,
-  mode,
-  size,
-  as,
-  className,
-  ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
-  const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
+      <RadioGroupPrimitive.Indicator asChild>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+          <circle
+            cx="10"
+            cy="10"
+            r="6"
+            strokeWidth="4"
+            className={cn(
+              "stroke-primary-base transition duration-200 ease-out",
+              // hover
+              "group-hover/radio:stroke-primary-darker",
+              // focus
+              "group-focus/radio:stroke-primary-dark",
+              // disabled
+              "group-disabled/radio:stroke-bg-soft-200",
+            )}
+          />
+        </svg>
+      </RadioGroupPrimitive.Indicator>
+    </RadioGroupPrimitive.Item>
+  );
+});
+RadioGroupItem.displayName = "RadioGroupItem";
 
-  return <Component className={icon({ class: className })} {...rest} />;
-}
-ButtonIcon.displayName = BUTTON_ICON_NAME;
-
-export { ButtonRoot as Root, ButtonIcon as Icon };
+export { RadioGroup as Group, RadioGroupItem as Item };

@@ -1,279 +1,104 @@
-// AlignUI Button v0.0.0
+// AlignUI Tag v0.0.0
 
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
+import { RiCloseFill } from "@remixicon/react";
 
-import type { PolymorphicComponentProps } from "../../utils/polymorphic";
+import { PolymorphicComponentProps } from "../../utils/polymorphic";
 import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
 import { tv, type VariantProps } from "../../utils/tv";
 
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+const TAG_ROOT_NAME = "TagRoot";
+const TAG_ICON_NAME = "TagIcon";
+const TAG_DISMISS_BUTTON_NAME = "TagDismissButton";
+const TAG_DISMISS_ICON_NAME = "TagDismissIcon";
 
-export const buttonVariants = tv({
+export const tagVariants = tv({
   slots: {
     root: [
-      // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
+      "group/tag inline-flex h-6 items-center gap-2 rounded-md px-2 text-label-xs text-text-sub-600",
       "transition duration-200 ease-out",
-      // focus
-      "focus:outline-none",
-      // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      "ring-1 ring-inset",
     ],
     icon: [
       // base
-      "flex size-5 shrink-0 items-center justify-center",
+      "-mx-1 size-4 shrink-0 text-text-soft-400 transition duration-200 ease-out",
+      // hover
+      "group-hover/tag:text-text-sub-600",
     ],
+    dismissButton: [
+      // base
+      "group/dismiss-button -ml-1.5 -mr-1 size-4 shrink-0",
+      // focus
+      "focus:outline-none",
+    ],
+    dismissIcon: "size-4 text-text-soft-400 transition duration-200 ease-out",
   },
   variants: {
     variant: {
-      primary: {},
-      neutral: {},
-      error: {},
-    },
-    mode: {
-      filled: {},
       stroke: {
-        root: "ring-1 ring-inset",
+        root: [
+          // base
+          "bg-bg-white-0 ring-stroke-soft-200",
+          // hover
+          "hover:bg-bg-weak-50 hover:ring-transparent",
+          // focus-within
+          "focus-within:bg-bg-weak-50 focus-within:ring-transparent",
+        ],
+        dismissIcon: [
+          // hover
+          "group-hover/dismiss-button:text-text-sub-600",
+          // focus
+          "group-focus/dismiss-button:text-text-sub-600",
+        ],
       },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
+      gray: {
+        root: [
+          // base
+          "bg-bg-weak-50 ring-transparent",
+          // hover
+          "hover:bg-bg-white-0 hover:ring-stroke-soft-200",
+        ],
       },
     },
-    size: {
-      medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
-      },
-      xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
-        icon: "-mx-1",
+    disabled: {
+      true: {
+        root: "pointer-events-none bg-bg-weak-50 text-text-disabled-300 ring-transparent",
+        icon: "text-text-disabled-300 [&:not(.remixicon)]:opacity-[.48]",
+        dismissIcon: "text-text-disabled-300",
       },
     },
   },
-  compoundVariants: [
-    //#region variant=primary
-    {
-      variant: "primary",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-primary-base text-static-white",
-          // hover
-          "hover:bg-primary-darker",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
-          // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-primary-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-primary-alpha-10",
-          // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-error-base text-static-white",
-          // hover
-          "hover:bg-red-700",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "text-error-base ring-error-base bg-bg-white-0",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
-          // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "text-error-base bg-transparent ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-    //#endregion
-  ],
   defaultVariants: {
-    variant: "primary",
-    mode: "filled",
-    size: "medium",
+    variant: "stroke",
   },
 });
 
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
+type TagSharedProps = VariantProps<typeof tagVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+type TagProps = VariantProps<typeof tagVariants> &
+  React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
   };
 
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
+const TagRoot = React.forwardRef<HTMLDivElement, TagProps>(
   (
-    { children, variant, mode, size, asChild, className, ...rest },
+    { asChild, children, variant, disabled, className, ...rest },
     forwardedRef,
   ) => {
     const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
+    const Component = asChild ? Slot : "div";
+    const { root } = tagVariants({ variant, disabled });
 
-    const sharedProps: ButtonSharedProps = {
+    const sharedProps: TagSharedProps = {
       variant,
-      mode,
-      size,
+      disabled,
     };
 
     const extendedChildren = recursiveCloneChildren(
       children as React.ReactElement[],
       sharedProps,
-      [BUTTON_ICON_NAME],
+      [TAG_ICON_NAME, TAG_DISMISS_BUTTON_NAME, TAG_DISMISS_ICON_NAME],
       uniqueId,
       asChild,
     );
@@ -282,6 +107,7 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
       <Component
         ref={forwardedRef}
         className={root({ class: className })}
+        aria-disabled={disabled}
         {...rest}
       >
         {extendedChildren}
@@ -289,21 +115,74 @@ const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
     );
   },
 );
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+TagRoot.displayName = TAG_ROOT_NAME;
 
-function ButtonIcon<T extends React.ElementType>({
-  variant,
-  mode,
-  size,
-  as,
+function TagIcon<T extends React.ElementType>({
   className,
+  variant,
+  disabled,
+  as,
   ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
+}: PolymorphicComponentProps<T, TagSharedProps>) {
   const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
+  const { icon } = tagVariants({ variant, disabled });
 
   return <Component className={icon({ class: className })} {...rest} />;
 }
-ButtonIcon.displayName = BUTTON_ICON_NAME;
+TagIcon.displayName = TAG_ICON_NAME;
 
-export { ButtonRoot as Root, ButtonIcon as Icon };
+type TagDismissButtonProps = TagSharedProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    asChild?: boolean;
+  };
+
+const TagDismissButton = React.forwardRef<
+  HTMLButtonElement,
+  TagDismissButtonProps
+>(
+  (
+    { asChild, children, className, variant, disabled, ...rest },
+    forwardedRef,
+  ) => {
+    const Component = asChild ? Slot : "button";
+    const { dismissButton } = tagVariants({ variant, disabled });
+
+    return (
+      <Component
+        ref={forwardedRef}
+        className={dismissButton({ class: className })}
+        {...rest}
+      >
+        {children ?? (
+          <TagDismissIcon
+            variant={variant}
+            disabled={disabled}
+            as={RiCloseFill}
+          />
+        )}
+      </Component>
+    );
+  },
+);
+TagDismissButton.displayName = TAG_DISMISS_BUTTON_NAME;
+
+function TagDismissIcon<T extends React.ElementType>({
+  className,
+  variant,
+  disabled,
+  as,
+  ...rest
+}: PolymorphicComponentProps<T, TagSharedProps>) {
+  const Component = as || "div";
+  const { dismissIcon } = tagVariants({ variant, disabled });
+
+  return <Component className={dismissIcon({ class: className })} {...rest} />;
+}
+TagDismissIcon.displayName = TAG_DISMISS_ICON_NAME;
+
+export {
+  TagRoot as Root,
+  TagIcon as Icon,
+  TagDismissButton as DismissButton,
+  TagDismissIcon as DismissIcon,
+};
