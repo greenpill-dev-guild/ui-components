@@ -46,7 +46,7 @@ export const buttonVariants = tv({
     },
     size: {
       medium: {
-        root: "h-10 gap-3 rounded-10 px-3.5 text-label-sm",
+        root: "rounded-10 h-10 gap-3 px-3.5 text-label-sm",
         icon: "-mx-1",
       },
       small: {
@@ -85,7 +85,7 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "text-primary-base ring-primary-base bg-bg-white-0",
+          "bg-bg-white-0 text-primary-base ring-primary-base",
           // hover
           "hover:bg-primary-alpha-10 hover:ring-transparent",
           // focus
@@ -101,9 +101,9 @@ export const buttonVariants = tv({
           // base
           "bg-primary-alpha-10 text-primary-base ring-transparent",
           // hover
-          "hover:ring-primary-base hover:bg-bg-white-0",
+          "hover:bg-bg-white-0 hover:ring-primary-base",
           // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
+          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
         ],
       },
     },
@@ -113,11 +113,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "text-primary-base bg-transparent ring-transparent",
+          "bg-transparent text-primary-base ring-transparent",
           // hover
           "hover:bg-primary-alpha-10",
           // focus
-          "focus-visible:ring-primary-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus",
+          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
         ],
       },
     },
@@ -203,7 +203,7 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "text-error-base ring-error-base bg-bg-white-0",
+          "bg-bg-white-0 text-error-base ring-error-base",
           // hover
           "hover:bg-red-alpha-10 hover:ring-transparent",
           // focus
@@ -217,11 +217,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "text-error-base bg-red-alpha-10 ring-transparent",
+          "bg-red-alpha-10 text-error-base ring-transparent",
           // hover
-          "hover:ring-error-base hover:bg-bg-white-0",
+          "hover:bg-bg-white-0 hover:ring-error-base",
           // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
+          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
         ],
       },
     },
@@ -231,11 +231,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "text-error-base bg-transparent ring-transparent",
+          "bg-transparent text-error-base ring-transparent",
           // hover
           "hover:bg-red-alpha-10",
           // focus
-          "focus-visible:ring-error-base focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus",
+          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
         ],
       },
     },
@@ -250,7 +250,7 @@ export const buttonVariants = tv({
 
 type ButtonSharedProps = VariantProps<typeof buttonVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
+export type ButtonRootProps = VariantProps<typeof buttonVariants> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     asChild?: boolean;
   };

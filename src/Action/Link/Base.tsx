@@ -81,7 +81,7 @@ export const linkButtonVariants = tv({
 
 type LinkButtonSharedProps = VariantProps<typeof linkButtonVariants>;
 
-type LinkButtonProps = VariantProps<typeof linkButtonVariants> &
+export type LinkButtonProps = VariantProps<typeof linkButtonVariants> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     asChild?: boolean;
   };
