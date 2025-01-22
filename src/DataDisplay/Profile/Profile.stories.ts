@@ -1,17 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 
 import { Profile } from ".";
-
 
 const meta = {
   title: "Data Display/Profile",
   component: Profile,
   parameters: {
-    
     layout: "centered",
   },
- 
+
   tags: ["autodocs"],
 
   argTypes: {
@@ -24,8 +21,6 @@ const meta = {
     type: { control: "boolean" },
     registryDate: { control: "date" },
   },
- 
-  
 } satisfies Meta<typeof Profile>;
 
 export default meta;
@@ -41,8 +36,8 @@ export const Public: Story = {
     email: "palms@greenpill.builders",
     type: "public",
     registryDate: new Date(),
-  }
-}
+  },
+};
 
 export const Private: Story = {
   args: {
@@ -54,5 +49,5 @@ export const Private: Story = {
     email: "palms@greenpill.builders",
     type: "private",
     registryDate: new Date(),
-  }
-}
+  },
+};

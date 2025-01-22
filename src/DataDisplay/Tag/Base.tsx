@@ -76,12 +76,12 @@ export const tagVariants = tv({
 
 type TagSharedProps = VariantProps<typeof tagVariants>;
 
-type TagProps = VariantProps<typeof tagVariants> &
+export type TagRootProps = VariantProps<typeof tagVariants> &
   React.HTMLAttributes<HTMLDivElement> & {
     asChild?: boolean;
   };
 
-const TagRoot = React.forwardRef<HTMLDivElement, TagProps>(
+const TagRoot = React.forwardRef<HTMLDivElement, TagRootProps>(
   (
     { asChild, children, variant, disabled, className, ...rest },
     forwardedRef,

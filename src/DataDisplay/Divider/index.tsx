@@ -23,17 +23,5 @@ export const Divider = ({
   label,
   ...props
 }: DividerProps) => {
-  return (
-    <Root
-      // type="button"
-      // className={["storybook-button", `storybook-button--${size}`, mode].join(
-      //   " "
-      // )}
-      // style={{ backgroundColor }}
-
-      {...props}
-    >
-      {label}
-    </Root>
-  );
+  return <Root {...props}>{label}</Root>;
 };

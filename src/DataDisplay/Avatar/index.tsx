@@ -1,39 +1,10 @@
 import React from "react";
 
-import { Root } from "./Base";
+import { Root, AvatarRootProps } from "./Base";
 
-export interface AvatarProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: "small" | "medium" | "large";
-  /** Avatar contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
-}
+export interface AvatarProps extends AvatarRootProps {}
 
 /** Primary UI component for user interaction */
-export const Avatar = ({
-  primary = false,
-  size = "medium",
-  backgroundColor,
-  label,
-  ...props
-}: AvatarProps) => {
-  return (
-    <Root
-      // type="button"
-      // className={["storybook-button", `storybook-button--${size}`, mode].join(
-      //   " "
-      // )}
-      // style={{ backgroundColor }}
-
-      {...props}
-    >
-      {label}
-    </Root>
-  );
+export const Avatar = ({ ...props }: AvatarProps) => {
+  return <Root {...props} />;
 };

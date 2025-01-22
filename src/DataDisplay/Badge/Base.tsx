@@ -89,7 +89,7 @@ export const statusBadgeVariants = tv({
 
 type StatusBadgeSharedProps = VariantProps<typeof statusBadgeVariants>;
 
-type StatusBadgeRootProps = React.HTMLAttributes<HTMLDivElement> &
+export type StatusBadgeRootProps = React.HTMLAttributes<HTMLDivElement> &
   VariantProps<typeof statusBadgeVariants> & {
     asChild?: boolean;
   };

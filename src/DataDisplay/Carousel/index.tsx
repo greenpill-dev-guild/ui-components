@@ -1,40 +1,19 @@
 import React from "react";
-
-import { Root } from "./Base";
+import { clsx } from "clsx";
 
 export interface CarouselProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: "small" | "medium" | "large";
-  /** Carousel contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
+  images: { src: string; alt: string }[];
+  className?: string;
 }
 
-/** Primary UI component for user interaction */
-export const Carousel = ({
-  primary = false,
-  size = "medium",
-  backgroundColor,
-  label,
-  ...props
-}: CarouselProps) => {
+export const Carousel = ({ images, className }: CarouselProps) => {
   return (
-    <Root
-      // type="button"
-      // className={["storybook-button", `storybook-button--${size}`, mode].join(
-      //   " "
-      // )}
-      // style={{ backgroundColor }}
-
-      variant="neutral"
-      {...props}
-    >
-      {label}
-    </Root>
+    <ul className={clsx("carousel rounded-box w-64", className)}>
+      {images.map((image, index) => (
+        <li key={index}>
+          <img src={image.src} alt={image.alt} />
+        </li>
+      ))}
+    </ul>
   );
 };

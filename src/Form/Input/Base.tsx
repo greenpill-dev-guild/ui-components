@@ -148,7 +148,7 @@ export const inputVariants = tv({
   },
 });
 
-type InputSharedProps = VariantProps<typeof inputVariants>;
+export type InputSharedProps = VariantProps<typeof inputVariants>;
 
 function InputRoot({
   className,

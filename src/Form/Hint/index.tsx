@@ -1,39 +1,13 @@
 import React from "react";
 
-import { Root } from "./Base";
+import { Root, HintRootProps } from "./Base";
 
-export interface HintProps {
-  /** Is this the principal call to action on the page? */
-  primary?: boolean;
-  /** What background color to use */
-  backgroundColor?: string;
-  /** How large should the button be? */
-  size?: "small" | "medium" | "large";
-  /** Hint contents */
-  label: string;
-  /** Optional click handler */
-  onClick?: () => void;
+export interface HintProps extends HintRootProps {
+  hasError?: boolean;
+  disabled?: boolean;
 }
 
 /** Primary UI component for user interaction */
-export const Hint = ({
-  primary = false,
-  size = "medium",
-  backgroundColor,
-  label,
-  ...props
-}: HintProps) => {
-  return (
-    <Root
-      // type="button"
-      // className={["storybook-button", `storybook-button--${size}`, mode].join(
-      //   " "
-      // )}
-      // style={{ backgroundColor }}
-
-      {...props}
-    >
-      {label}
-    </Root>
-  );
+export const Hint = ({ hasError, disabled, ...props }: HintProps) => {
+  return <Root {...props} hasError={hasError} disabled={disabled} />;
 };

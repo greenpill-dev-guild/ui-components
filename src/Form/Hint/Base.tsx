@@ -32,7 +32,7 @@ export const hintVariants = tv({
 
 type HintSharedProps = VariantProps<typeof hintVariants>;
 
-type HintRootProps = VariantProps<typeof hintVariants> &
+export type HintRootProps = VariantProps<typeof hintVariants> &
   React.HTMLAttributes<HTMLDivElement>;
 
 function HintRoot({
