@@ -7,6 +7,6 @@ export interface ButtonProps extends ButtonRootProps {
 }
 
 /** Primary UI component for user interaction */
-export const Button = ({ label, ...props }: ButtonProps) => {
+export const Button = ({ label, variant, ...props }: ButtonProps) => {
   return <Root {...props}>{label}</Root>;
 };
