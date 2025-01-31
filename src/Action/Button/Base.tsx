@@ -14,12 +14,15 @@ export const buttonVariants = tv({
   slots: {
     root: [
       // base
-      "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
-      "transition duration-200 ease-out",
-      // focus
+      "inline-flex items-center justify-center whitespace-nowrap rounded-lg transition duration-200 ease-out",
       "focus:outline-none",
+      // "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
+      // "transition duration-200 ease-out ",
+      // focus
+      // "focus:outline-none",
       // disabled
-      "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      // "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
+      // "bg-gradient-to-b from-green-600 to-green-700 text-white py-2 px-4 rounded-lg shadow-md hover:from-green-700 hover:to-green-800 hover:shadow-lg active:from-green-800 active:to-green-900 active:translate-y-[1px]",
     ],
     icon: [
       // base
@@ -28,7 +31,16 @@ export const buttonVariants = tv({
   },
   variants: {
     variant: {
-      primary: {},
+      primary: {
+        root: [
+          //base
+          "bg-gradient-to-b from-green-600 to-green-700 text-white"
+          //hover
+
+          //focus
+
+        ]
+      },
       neutral: {},
       error: {},
     },
@@ -71,11 +83,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "bg-primary-base text-static-white",
+          // "bg-gradient-to-b from-green-600 to-green-700 text-white py-2 px-4 rounded-lg shadow-md",
           // hover
-          "hover:bg-primary-darker",
+          // "hover:bg-primary-darker",
           // focus
-          "focus-visible:shadow-button-primary-focus",
+          // "focus-visible:shadow-button-primary-focus",
         ],
       },
     },
@@ -85,11 +97,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "bg-bg-white-0 text-primary-base ring-primary-base",
+          // "bg-bg-white-0 text-primary-base ring-primary-base",
           // hover
-          "hover:bg-primary-alpha-10 hover:ring-transparent",
+          // "hover:bg-primary-alpha-10 hover:ring-transparent",
           // focus
-          "focus-visible:shadow-button-primary-focus",
+          // "focus-visible:shadow-button-primary-focus",
         ],
       },
     },
@@ -99,11 +111,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "bg-primary-alpha-10 text-primary-base ring-transparent",
+          // "bg-primary-alpha-10 text-primary-base ring-transparent",
           // hover
-          "hover:bg-bg-white-0 hover:ring-primary-base",
+          // "hover:bg-bg-white-0 hover:ring-primary-base",
           // focus
-          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
+          // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
         ],
       },
     },
@@ -113,11 +125,11 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "bg-transparent text-primary-base ring-transparent",
+          // "bg-transparent text-primary-base ring-transparent",
           // hover
-          "hover:bg-primary-alpha-10",
+          // "hover:bg-primary-alpha-10",
           // focus
-          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
+          // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
         ],
       },
     },
@@ -189,64 +201,64 @@ export const buttonVariants = tv({
       class: {
         root: [
           // base
-          "bg-error-base text-static-white",
+          // "bg-error-base text-static-white",
           // hover
-          "hover:bg-red-700",
+          // "hover:bg-red-700",
           // focus
-          "focus-visible:shadow-button-error-focus",
+          // "focus-visible:shadow-button-error-focus",
         ],
       },
     },
-    {
-      variant: "error",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-error-base ring-error-base",
-          // hover
-          "hover:bg-red-alpha-10 hover:ring-transparent",
-          // focus
-          "focus-visible:shadow-button-error-focus",
-        ],
+      {
+        variant: "error",
+        mode: "stroke",
+        class: {
+          root: [
+            // base
+            // "bg-bg-white-0 text-error-base ring-error-base",
+            // hover
+            // "hover:bg-red-alpha-10 hover:ring-transparent",
+            // focus
+            // "focus-visible:shadow-button-error-focus",
+          ],
+        },
       },
-    },
-    {
-      variant: "error",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-red-alpha-10 text-error-base ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:ring-error-base",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
-        ],
+      {
+        variant: "error",
+        mode: "lighter",
+        class: {
+          root: [
+            // base
+            // "bg-red-alpha-10 text-error-base ring-transparent",
+            // hover
+            // "hover:bg-bg-white-0 hover:ring-error-base",
+            // focus
+            // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
+          ],
+        },
       },
-    },
-    {
-      variant: "error",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-error-base ring-transparent",
-          // hover
-          "hover:bg-red-alpha-10",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
-        ],
+      {
+        variant: "error",
+        mode: "ghost",
+        class: {
+          root: [
+            // base
+            // "bg-transparent text-error-base ring-transparent",
+            // hover
+            // "hover:bg-red-alpha-10",
+            // focus
+            // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
+          ],
+        },
       },
+      //#endregion
+    ],
+    defaultVariants: {
+      variant: "primary",
+      mode: "filled",
+      size: "medium",
     },
-    //#endregion
-  ],
-  defaultVariants: {
-    variant: "primary",
-    mode: "filled",
-    size: "medium",
-  },
-});
+  });
 
 type ButtonSharedProps = VariantProps<typeof buttonVariants>;
 
