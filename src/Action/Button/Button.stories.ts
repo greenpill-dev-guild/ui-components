@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 import { Button } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+
 const meta = {
     title: 'Action/Button',
     component: Button,
@@ -17,12 +18,31 @@ const meta = {
     argTypes: {
         variant: {
             control: 'select',
-            options: ['primary', 'neutral', 'error'],
+            options: ['primary', 'secondary', 'danger'],
+            description: 'The visual style of the button',
         },
-        // backgroundColor: { control: 'color' },
+        mode: {
+            control: 'select',
+            options: ['filled', 'outline', 'inactive'],
+            description: 'The button mode (filled, outline, or inactive)',
+        },
+        size: {
+            control: 'select',
+            options: ['small', 'medium', 'large'],
+            description: 'The size of the button',
+        },
+        rounded: {
+            control: 'select',
+            options: ['rounded-lg', 'rounded-full'],
+            description: 'Rounded corners style',
+        },
     },
-    // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-    args: { onClick: fn() },
+    args: {
+        variant: 'primary',
+        mode: 'filled',
+        size: 'small',
+        children: 'Button',
+    },
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -31,14 +51,59 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
     args: {
-        label: 'Button',
         variant: 'primary',
+        mode: 'filled',
+        size: 'large',
+        rounded: 'rounded-full',
+        children: 'Approve',
     },
 };
 
-export const Error: Story = {
+export const Secondary: Story = {
     args: {
-        label: 'Button',
-        variant: 'error',
+        variant: 'secondary',
+        mode: 'outline',
+        size: 'large',
+        rounded: 'rounded-full',
+        children: 'Upload media',
+    },
+};
+
+export const Danger: Story = {
+    args: {
+        variant: 'danger',
+        mode: 'outline',
+        size: 'large',
+        rounded: 'rounded-full',
+        children: 'Reject',
+    },
+};
+
+export const SmallPrimary: Story = {
+    args: {
+        variant: 'primary',
+        mode: 'filled',
+        size: 'small',
+        children: 'OK',
+    },
+};
+
+export const Inactive: Story = {
+    args: {
+        variant: 'primary',
+        mode: 'inactive',
+        size: 'large',
+        rounded: 'rounded-full',
+        children: 'Next',
+    },
+};
+
+export const Playground: Story = {
+    args: {
+        variant: 'primary',
+        mode: 'filled',
+        size: 'small',
+        rounded: 'rounded-lg',
+        children: 'Button',
     },
 };

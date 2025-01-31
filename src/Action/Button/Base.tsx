@@ -15,14 +15,6 @@ export const buttonVariants = tv({
     root: [
       // base
       "inline-flex items-center justify-center whitespace-nowrap rounded-lg transition duration-200 ease-out",
-      "focus:outline-none",
-      // "group relative inline-flex items-center justify-center whitespace-nowrap outline-none",
-      // "transition duration-200 ease-out ",
-      // focus
-      // "focus:outline-none",
-      // disabled
-      // "disabled:pointer-events-none disabled:bg-bg-weak-50 disabled:text-text-disabled-300 disabled:ring-transparent",
-      // "bg-gradient-to-b from-green-600 to-green-700 text-white py-2 px-4 rounded-lg shadow-md hover:from-green-700 hover:to-green-800 hover:shadow-lg active:from-green-800 active:to-green-900 active:translate-y-[1px]",
     ],
     icon: [
       // base
@@ -35,234 +27,122 @@ export const buttonVariants = tv({
         root: [
           //base
           "bg-gradient-to-b from-green-600 to-green-700 text-white"
-          //hover
-
-          //focus
+        ]
+      },
+      secondary: {
+        root: [
+          //base
+          "px-6 py-3 border border-gray-300 text-gray-700",
+        ]
+      },
+      danger: {
+        root: [
+          //base
+          "border border-red-500 text-red-500 hover:bg-red-50 active:translate-y-[1px]",
 
         ]
       },
-      neutral: {},
-      error: {},
     },
     mode: {
       filled: {},
-      stroke: {
-        root: "ring-1 ring-inset",
+      outline: {
+        // root: "ring-1 ring-inset",
       },
-      lighter: {
-        root: "ring-1 ring-inset",
-      },
-      ghost: {
-        root: "ring-1 ring-inset",
-      },
+      inactive: {
+        // root: "ring-1 ring-inset",
+      }
     },
     size: {
+      small: {
+        root: "rounded-10 h-8 gap-2.5 px-2.5 text-label-sm",
+        icon: "-mx-1",
+      },
       medium: {
         root: "rounded-10 h-10 gap-3 px-3.5 text-label-sm",
         icon: "-mx-1",
       },
-      small: {
-        root: "h-9 gap-3 rounded-lg px-3 text-label-sm",
-        icon: "-mx-1",
-      },
-      xsmall: {
-        root: "h-8 gap-2.5 rounded-lg px-2.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      xxsmall: {
-        root: "h-7 gap-2.5 rounded-lg px-2 text-label-sm",
+      large: {
+        root: "h-9 gap-3 rounded-full px-3 text-label-sm",
         icon: "-mx-1",
       },
     },
   },
   compoundVariants: [
-    //#region variant=primary
+    // Primary variant configurations
     {
       variant: "primary",
       mode: "filled",
+      size: "large",
       class: {
         root: [
-          // base
-          // "bg-gradient-to-b from-green-600 to-green-700 text-white py-2 px-4 rounded-lg shadow-md",
-          // hover
-          // "hover:bg-primary-darker",
-          // focus
-          // "focus-visible:shadow-button-primary-focus",
+          "px-6 py-3 bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
         ],
       },
     },
     {
-      variant: "primary",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          // "bg-bg-white-0 text-primary-base ring-primary-base",
-          // hover
-          // "hover:bg-primary-alpha-10 hover:ring-transparent",
-          // focus
-          // "focus-visible:shadow-button-primary-focus",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          // "bg-primary-alpha-10 text-primary-base ring-transparent",
-          // hover
-          // "hover:bg-bg-white-0 hover:ring-primary-base",
-          // focus
-          // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
-        ],
-      },
-    },
-    {
-      variant: "primary",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          // "bg-transparent text-primary-base ring-transparent",
-          // hover
-          // "hover:bg-primary-alpha-10",
-          // focus
-          // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-primary-focus focus-visible:ring-primary-base",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=neutral
-    {
-      variant: "neutral",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          "bg-bg-strong-950 text-text-white-0",
-          // hover
-          "hover:bg-bg-surface-800",
-          // focus
-          "focus-visible:shadow-button-important-focus",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "stroke",
-      class: {
-        root: [
-          // base
-          "bg-bg-white-0 text-text-sub-600 shadow-regular-xs ring-stroke-soft-200",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950 hover:shadow-none hover:ring-transparent",
-          // focus
-          "focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "lighter",
-      class: {
-        root: [
-          // base
-          "bg-bg-weak-50 text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-white-0 hover:text-text-strong-950 hover:shadow-regular-xs hover:ring-stroke-soft-200",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    {
-      variant: "neutral",
-      mode: "ghost",
-      class: {
-        root: [
-          // base
-          "bg-transparent text-text-sub-600 ring-transparent",
-          // hover
-          "hover:bg-bg-weak-50 hover:text-text-strong-950",
-          // focus
-          "focus-visible:bg-bg-white-0 focus-visible:text-text-strong-950 focus-visible:shadow-button-important-focus focus-visible:ring-stroke-strong-950",
-        ],
-      },
-    },
-    //#endregion
-
-    //#region variant=error
-    {
-      variant: "error",
-      mode: "filled",
-      class: {
-        root: [
-          // base
-          // "bg-error-base text-static-white",
-          // hover
-          // "hover:bg-red-700",
-          // focus
-          // "focus-visible:shadow-button-error-focus",
-        ],
-      },
-    },
-      {
-        variant: "error",
-        mode: "stroke",
-        class: {
-          root: [
-            // base
-            // "bg-bg-white-0 text-error-base ring-error-base",
-            // hover
-            // "hover:bg-red-alpha-10 hover:ring-transparent",
-            // focus
-            // "focus-visible:shadow-button-error-focus",
-          ],
-        },
-      },
-      {
-        variant: "error",
-        mode: "lighter",
-        class: {
-          root: [
-            // base
-            // "bg-red-alpha-10 text-error-base ring-transparent",
-            // hover
-            // "hover:bg-bg-white-0 hover:ring-error-base",
-            // focus
-            // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
-          ],
-        },
-      },
-      {
-        variant: "error",
-        mode: "ghost",
-        class: {
-          root: [
-            // base
-            // "bg-transparent text-error-base ring-transparent",
-            // hover
-            // "hover:bg-red-alpha-10",
-            // focus
-            // "focus-visible:bg-bg-white-0 focus-visible:shadow-button-error-focus focus-visible:ring-error-base",
-          ],
-        },
-      },
-      //#endregion
-    ],
-    defaultVariants: {
       variant: "primary",
       mode: "filled",
-      size: "medium",
+      size: "small",
+      class: {
+        root: [
+          "px-3 py-2 bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
+        ],
+      },
     },
-  });
+    // Secondary variant configurations
+    {
+      variant: "secondary",
+      mode: "outline",
+      size: "large",
+      class: {
+        root: [
+          "px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-100 active:translate-y-[1px]",
+        ],
+      },
+    },
+    //Danger variant configurations
+    {
+      variant: "danger",
+      mode: "outline",
+      size: "large",
+      class: {
+        root: [
+          "px-6 py-3 border border-red-500 text-red-500",
+        ],
+      },
+    },
+    {
+      variant: "danger",
+      mode: "filled",
+      size: "small",
+      class: {
+        root: [
+          "px-3 py-2 bg-red-600 text-white",
+        ],
+      },
+    },
+    // Inactive state
+    {
+      variant: "primary",
+      mode: "inactive",
+      size: "large",
+      class: {
+        root: [
+          "px-6 py-3 bg-gray-100 text-gray-400 cursor-not-allowed",
+        ],
+      },
+    },
+  ],
+  defaultVariants: {
+    variant: "primary",
+    mode: "filled",
+    size: "medium",
+  },
+});
 
 type ButtonSharedProps = VariantProps<typeof buttonVariants>;
 
-export type ButtonRootProps = VariantProps<typeof buttonVariants> &
+type ButtonRootProps = VariantProps<typeof buttonVariants> &
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     asChild?: boolean;
   };
