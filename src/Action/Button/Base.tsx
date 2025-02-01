@@ -1,200 +1,118 @@
-// AlignUI Button v0.0.0
-
+// button.base.tsx
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-
-import type { PolymorphicComponentProps } from "../../utils/polymorphic";
-import { recursiveCloneChildren } from "../../utils/recursive-clone-children";
 import { tv, type VariantProps } from "../../utils/tv";
-
-const BUTTON_ROOT_NAME = "ButtonRoot";
-const BUTTON_ICON_NAME = "ButtonIcon";
+import type { PolymorphicComponentProps } from "../../utils/polymorphic";
 
 export const buttonVariants = tv({
-  slots: {
-    root: [
-      // base
-      "inline-flex items-center justify-center whitespace-nowrap rounded-lg transition duration-200 ease-out",
-    ],
-    icon: [
-      // base
-      "flex size-5 shrink-0 items-center justify-center",
-    ],
-  },
+  // A common base class if needed (here we ensure we always have a flex container)
+  base: "flex items-center",
   variants: {
     variant: {
-      primary: {
-        root: [
-          //base
-        ]
-      },
-      secondary: {
-        root: [
-          //base
-          "border border-gray-300 text-gray-700",
-        ]
-      },
-      danger: {
-        root: [
-          //base
-          "border border-red-500 text-red-500 hover:bg-red-50 active:translate-y-[1px]",
-
-        ]
-      },
+      primary: "",
+      secondary: "",
+      danger: "",
     },
     mode: {
-      filled: {},
-      outline: {
-        // root: "ring-1 ring-inset",
-      },
-      inactive: {
-        // root: "ring-1 ring-inset",
-      }
+      filled: "",
+      outline: "",
+      inactive: "",
     },
     size: {
-      small: {
-        // root: "rounded-10 h-8 gap-2.5 px-2.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      medium: {
-        // root: "rounded-10 h-10 gap-3 px-3.5 text-label-sm",
-        icon: "-mx-1",
-      },
-      large: {
-        // root: "rounded-full h-9 gap-3 px-3 text-label-sm",
-        icon: "-mx-1",
-      },
+      large: "",
+      small: "",
     },
   },
   compoundVariants: [
-    // Primary variant configurations
-    {
+    { // primaryFilledLargePill
       variant: "primary",
       mode: "filled",
       size: "large",
-      class: {
-        root: [
-          "px-6 py-3 bg-green-600 text-white rounded-full flex items-center justify-between hover:bg-green-700 active:translate-y-[1px]",
-        ],
-      },
+      class: "bg-green-500 text-white rounded-full px-6 py-2 flex items-center justify-between",
     },
-    {
+    { // primaryFilledSmallRounded
       variant: "primary",
       mode: "filled",
       size: "small",
-      class: {
-        root: [
-          "bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
-        ],
-      },
+      class: "bg-green-500 text-white rounded-md px-4 py-1",
     },
-    // Secondary variant configurations
-    {
+    { // secondaryOutlineLargePill
       variant: "secondary",
       mode: "outline",
       size: "large",
-      class: {
-        root: [
-          "flex items-center justify-between px-6 py-3 border border-gray-700 text-gray-700 hover:bg-gray-100 active:translate-y-[1px]",
-        ],
-      },
+      class: "border border-gray-300 text-gray-700 rounded-full px-6 py-2 flex items-center",
     },
-    //Danger variant configurations
-    {
-      variant: "danger",
-      mode: "outline",
-      size: "large",
-      class: {
-        root: [
-          "border border-red-500 text-red-500",
-        ],
-      },
-    },
-    {
-      variant: "danger",
-      mode: "filled",
-      size: "small",
-      class: {
-        root: [
-          "bg-red-600 text-white",
-        ],
-      },
-    },
-    // Inactive state
-    {
+    { // primaryInactiveLargePill
       variant: "primary",
       mode: "inactive",
       size: "large",
-      class: {
-        root: [
-          "bg-gray-100 text-gray-400 cursor-not-allowed",
-        ],
-      },
+      class: "bg-gray-200 text-gray-400 rounded-full px-6 py-2 flex items-center justify-between cursor-not-allowed",
+    },
+    { // secondaryOutlineSmallRounded
+      variant: "secondary",
+      mode: "outline",
+      size: "small",
+      class: "border border-gray-300 text-gray-700 rounded-md px-4 py-1",
+    },
+    { // dangerOutlineLargePill
+      variant: "danger",
+      mode: "outline",
+      size: "large",
+      class: "px-6 py-3 border border-red-500 text-red-500 rounded-full hover:bg-red-50 active:translate-y-[1px]",
+    },
+    { // dangerFilledSmallRounded
+      variant: "danger",
+      mode: "filled",
+      size: "small",
+      class: "bg-red-500 text-white rounded-md px-4 py-1 flex items-center",
+    },
+    { // primaryFilledSmallRounded
+      variant: "primary",
+      mode: "filled",
+      size: "small",
+      class: "bg-green-500 text-white rounded px-3 py-1 flex items-center",
     },
   ],
   defaultVariants: {
     variant: "primary",
     mode: "filled",
-    size: "medium",
+    size: "large",
   },
 });
 
-type ButtonSharedProps = VariantProps<typeof buttonVariants>;
+// Type for the props that our tv function understands
+export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
 
-type ButtonRootProps = VariantProps<typeof buttonVariants> &
-  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+// The low-level Button root component.
+export type ButtonRootProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  ButtonVariantProps & {
     asChild?: boolean;
   };
 
 const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
   (
-    { children, variant, mode, size, asChild, className, ...rest },
-    forwardedRef,
+    { children, asChild, className, variant, mode, size, ...rest },
+    ref,
   ) => {
-    const uniqueId = React.useId();
-    const Component = asChild ? Slot : "button";
-    const { root } = buttonVariants({ variant, mode, size });
-
-    const sharedProps: ButtonSharedProps = {
-      variant,
-      mode,
-      size,
-    };
-
-    const extendedChildren = recursiveCloneChildren(
-      children as React.ReactElement[],
-      sharedProps,
-      [BUTTON_ICON_NAME],
-      uniqueId,
-      asChild,
-    );
-
+    const Component = asChild ? "div" : "button";
+    const classes = buttonVariants({ variant, mode, size, class: className });
     return (
-      <Component
-        ref={forwardedRef}
-        className={root({ class: className })}
-        {...rest}
-      >
-        {extendedChildren}
+      <Component ref={ref} className={classes} {...rest}>
+        {children}
       </Component>
     );
   },
 );
-ButtonRoot.displayName = BUTTON_ROOT_NAME;
+ButtonRoot.displayName = "ButtonRoot";
 
+// Optional: a ButtonIcon component if you need icon styling.
 function ButtonIcon<T extends React.ElementType>({
-  variant,
-  mode,
-  size,
   as,
   className,
   ...rest
-}: PolymorphicComponentProps<T, ButtonSharedProps>) {
-  const Component = as || "div";
-  const { icon } = buttonVariants({ mode, variant, size });
-
-  return <Component className={icon({ class: className })} {...rest} />;
+}: PolymorphicComponentProps<T, {}>) {
+  const Component = as || "span";
+  return <Component className={className} {...rest} />;
 }
-ButtonIcon.displayName = BUTTON_ICON_NAME;
+ButtonIcon.displayName = "ButtonIcon";
 
 export { ButtonRoot as Root, ButtonIcon as Icon };
