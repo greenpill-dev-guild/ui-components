@@ -149,7 +149,7 @@ export const Loading: Story = {
         label: 'Loading',
         variant: 'primary',
         mode: 'filled',
-        size: 'medium',
+        size: 'large',
         loading: true,
     },
     parameters: {
@@ -164,8 +164,7 @@ export const WithIcon: Story = {
         label: 'Icon',
         variant: 'primary',
         mode: 'filled',
-        size: 'medium',
-        startDecorator: '🚀',
+        size: 'large',
     },
     parameters: {
         docs: {
