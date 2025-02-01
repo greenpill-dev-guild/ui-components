@@ -39,7 +39,7 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const PrimaryFilledLargePill: Story = {
     args: {
         // primaryFilledLargePill
         label: 'Button',
@@ -54,7 +54,7 @@ export const Primary: Story = {
     },
 };
 
-export const Secondary: Story = {
+export const PrimaryFilledSmallRounded: Story = {
     args: {
         // primaryFilledSmallRounded
         label: 'Button',
@@ -69,7 +69,7 @@ export const Secondary: Story = {
     },
 };
 
-export const Success: Story = {
+export const SecondaryOutlineLargePill: Story = {
     args: {
         // secondaryOutlineLargePill
         label: 'Button',
@@ -84,7 +84,7 @@ export const Success: Story = {
     },
 };
 
-export const Danger: Story = {
+export const PrimaryInactiveLargePill: Story = {
     args: {
         // primaryInactiveLargePill
         label: 'Button',
@@ -99,7 +99,7 @@ export const Danger: Story = {
     },
 };
 
-export const Outline: Story = {
+export const SecondaryOutlineSmallRounded: Story = {
     args: {
         // secondaryOutlineSmallRounded
         label: 'Button',
@@ -114,7 +114,7 @@ export const Outline: Story = {
     },
 };
 
-export const Small: Story = {
+export const DangerOutlineLargePill: Story = {
     args: {
         // dangerOutlineLargePill
         label: 'Button',
@@ -129,7 +129,7 @@ export const Small: Story = {
     },
 };
 
-export const Large: Story = {
+export const DangerFilledSmallRounded: Story = {
     args: {
         // dangerFilledSmallRounded
         label: 'Button',
@@ -140,22 +140,6 @@ export const Large: Story = {
     parameters: {
         docs: {
             description: 'The button in large size.',
-        },
-    },
-};
-
-export const Disabled: Story = {
-    args: {
-        // primaryFilledSmallRounded
-        label: 'Button',
-        variant: 'primary',
-        mode: 'filled',
-        size: 'small',
-        disabled: true,
-    },
-    parameters: {
-        docs: {
-            description: 'The disabled state of the button.',
         },
     },
 };
