@@ -26,13 +26,12 @@ export const buttonVariants = tv({
       primary: {
         root: [
           //base
-          "bg-gradient-to-b from-green-600 to-green-700 text-white"
         ]
       },
       secondary: {
         root: [
           //base
-          "px-6 py-3 border border-gray-300 text-gray-700",
+          "border border-gray-300 text-gray-700",
         ]
       },
       danger: {
@@ -54,15 +53,15 @@ export const buttonVariants = tv({
     },
     size: {
       small: {
-        root: "rounded-10 h-8 gap-2.5 px-2.5 text-label-sm",
+        // root: "rounded-10 h-8 gap-2.5 px-2.5 text-label-sm",
         icon: "-mx-1",
       },
       medium: {
-        root: "rounded-10 h-10 gap-3 px-3.5 text-label-sm",
+        // root: "rounded-10 h-10 gap-3 px-3.5 text-label-sm",
         icon: "-mx-1",
       },
       large: {
-        root: "h-9 gap-3 rounded-full px-3 text-label-sm",
+        // root: "rounded-full h-9 gap-3 px-3 text-label-sm",
         icon: "-mx-1",
       },
     },
@@ -75,7 +74,7 @@ export const buttonVariants = tv({
       size: "large",
       class: {
         root: [
-          "px-6 py-3 bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
+          "px-6 py-3 bg-green-600 text-white rounded-full flex items-center justify-between hover:bg-green-700 active:translate-y-[1px]",
         ],
       },
     },
@@ -85,7 +84,7 @@ export const buttonVariants = tv({
       size: "small",
       class: {
         root: [
-          "px-3 py-2 bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
+          "bg-green-600 text-white hover:bg-green-700 active:translate-y-[1px]",
         ],
       },
     },
@@ -96,7 +95,7 @@ export const buttonVariants = tv({
       size: "large",
       class: {
         root: [
-          "px-6 py-3 border border-gray-300 text-gray-700 hover:bg-gray-100 active:translate-y-[1px]",
+          "flex items-center justify-between px-6 py-3 border border-gray-700 text-gray-700 hover:bg-gray-100 active:translate-y-[1px]",
         ],
       },
     },
@@ -107,7 +106,7 @@ export const buttonVariants = tv({
       size: "large",
       class: {
         root: [
-          "px-6 py-3 border border-red-500 text-red-500",
+          "border border-red-500 text-red-500",
         ],
       },
     },
@@ -117,7 +116,7 @@ export const buttonVariants = tv({
       size: "small",
       class: {
         root: [
-          "px-3 py-2 bg-red-600 text-white",
+          "bg-red-600 text-white",
         ],
       },
     },
@@ -128,7 +127,7 @@ export const buttonVariants = tv({
       size: "large",
       class: {
         root: [
-          "px-6 py-3 bg-gray-100 text-gray-400 cursor-not-allowed",
+          "bg-gray-100 text-gray-400 cursor-not-allowed",
         ],
       },
     },

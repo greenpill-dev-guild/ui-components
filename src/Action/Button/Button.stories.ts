@@ -51,6 +51,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'primary',
         mode: 'filled',
         size: 'large',
@@ -61,6 +62,7 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'secondary',
         mode: 'outline',
         size: 'large',
@@ -71,6 +73,7 @@ export const Secondary: Story = {
 
 export const Danger: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'danger',
         mode: 'outline',
         size: 'large',
@@ -81,6 +84,7 @@ export const Danger: Story = {
 
 export const SmallPrimary: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'primary',
         mode: 'filled',
         size: 'small',
@@ -90,6 +94,7 @@ export const SmallPrimary: Story = {
 
 export const Inactive: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'primary',
         mode: 'inactive',
         size: 'large',
@@ -100,6 +105,7 @@ export const Inactive: Story = {
 
 export const Playground: Story = {
     args: {
+        label: 'Click Me!',
         variant: 'primary',
         mode: 'filled',
         size: 'small',
