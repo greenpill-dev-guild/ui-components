@@ -3,36 +3,167 @@ import { fn } from "@storybook/test";
 
 import { Button } from ".";
 
-// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
   title: "Action/Button",
   component: Button,
   parameters: {
-    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
+    docs: {
+      description: "A versatile button component with multiple variants and states.",
+    },
   },
-  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
-  argTypes: {
-    // backgroundColor: { control: "color" },
+  args: { 
+    onClick: fn(),
+    label: "Button",
+    variant: "primary",
+    mode: "filled",
+    size: "medium"
   },
-  // Use `fn` to spy on the onClick arg, which will appear in the actions panel once invoked: https://storybook.js.org/docs/essentials/actions#action-args
-  args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Primary: Story = {
-  args: {
+  args: { // primaryFilledLargePill
     label: "Button",
+    variant: "primary",
+    mode: "filled",
+    size: "large",
+  },
+  parameters: {
+    docs: {
+      description: "The primary button variant with filled mode.",
+    },
   },
 };
 
 export const Secondary: Story = {
-  args: {
+  args: { // primaryFilledSmallRounded
     label: "Button",
+    variant: "primary",
+    mode: "filled",
+    size: "small",
+},
+  parameters: {
+    docs: { 
+      description: "The secondary button variant with stroke mode.",
+    },
+  },
+};
+
+export const Success: Story = {
+  args: { // secondaryOutlineLargePill 
+    label: "Button",
+    variant: "secondary",
+    mode: "outline",
+    size: "large",
+  },
+  parameters: {
+    docs: {
+      description: "The success button variant with filled mode.",
+    },
+  },
+};
+
+export const Danger: Story = {
+  args: { // primaryInactiveLargePill
+    label: "Button",
+    variant: "primary",
+    mode: "inactive",
+    size: "large",
+  },
+  parameters: {
+    docs: {
+      description: "The danger button variant with filled mode.",
+    },
+  },
+};
+
+export const Outline: Story = {
+  args: { // secondaryOutlineSmallRounded
+    label: "Button",
+    variant: "secondary",
+    mode: "outline",
+    size: "small",
+  },
+  parameters: {
+    docs: {
+      description: "The outline button variant.",
+    },
+  },
+};
+
+export const Small: Story = {
+  args: { // dangerOutlineLargePill
+    label: "Button",
+    variant: "danger",
+    mode: "outline",
+    size: "large",
+  },
+  parameters: {
+    docs: {
+      description: "The button in small size.",
+    },
+  },
+};
+
+export const Large: Story = {
+  args: { // dangerFilledSmallRounded
+    label: "Button",
+    variant: "danger",
+    mode: "filled",
+    size: "small",
+  },
+  parameters: {
+    docs: {
+      description: "The button in large size.",
+    },
+  },
+};
+
+export const Disabled: Story = {
+  args: {  // primaryFilledSmallRounded
+    label: "Button",
+    variant: "primary",
+    mode: "filled",
+    size: "small",
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: "The disabled state of the button.",
+    },
+  },
+};
+
+export const Loading: Story = {
+  args: {
+    label: "Loading",
+    variant: "primary",
+    mode: "filled",
+    size: "medium",
+    loading: true,
+  },
+  parameters: {
+    docs: {
+      description: "The loading state of the button.",
+    },
+  },
+};
+
+export const WithIcon: Story = {
+  args: {
+    label: "Icon",
+    variant: "primary",
+    mode: "filled",
+    size: "medium",
+    startDecorator: "🚀",
+  },
+  parameters: {
+    docs: {
+      description: "The button with an icon.",
+    },
   },
 };
