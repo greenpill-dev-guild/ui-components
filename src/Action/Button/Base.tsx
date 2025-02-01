@@ -89,20 +89,23 @@ export type ButtonRootProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
     asChild?: boolean;
   };
 
-const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
-  (
-    { children, asChild, className, variant, mode, size, ...rest },
-    ref,
-  ) => {
-    const Component = asChild ? "div" : "button";
-    const classes = buttonVariants({ variant, mode, size, class: className });
-    return (
-      <Component ref={ref} className={classes} {...rest}>
-        {children}
-      </Component>
-    );
-  },
-);
+  const ButtonRoot = React.forwardRef<HTMLButtonElement, ButtonRootProps>(
+    (
+      { children, className, variant, mode, size, ...rest },
+      ref,
+    ) => {
+      const classes = buttonVariants({ variant, mode, size, class: className });
+      return (
+        <button
+          ref={ref}
+          className={classes}
+          {...rest}
+        >
+          {children}
+        </button>
+      );
+    },
+  );
 ButtonRoot.displayName = "ButtonRoot";
 
 // Optional: a ButtonIcon component if you need icon styling.
