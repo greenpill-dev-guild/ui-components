@@ -3,6 +3,7 @@ import * as React from "react";
 import { tv, type VariantProps } from "../../utils/tv";
 import type { PolymorphicComponentProps } from "../../utils/polymorphic";
 
+
 export const buttonVariants = tv({
   // A common base class if needed (here we ensure we always have a flex container)
   base: "flex items-center",
@@ -14,12 +15,12 @@ export const buttonVariants = tv({
     },
     mode: {
       filled: "",
-      outline: "border border-gray-300 text-gray-700",
-      inactive: " bg-gray-200 text-gray-400 cursor-not-allowed",
+      outline: "border",
+      inactive: "bg-gray-200 text-gray-400 cursor-not-allowed",
     },
     size: {
-      large: "px-6 py-2 rounded-full",
-      small: "px-4 py-1 rounded",
+      large: "px-6 py-2 text-base rounded-full",
+      small: "px-4 py-1 text-sm rounded",
     },
   },
   compoundVariants: [
@@ -27,7 +28,7 @@ export const buttonVariants = tv({
       variant: "primary",
       mode: "filled",
       size: "large",
-      class: "bg-green-500 text-white ",
+      class: "text-white font-medium shadow-fancy-buttons-primary bg-gradient-to-b from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 transition-colors duration-150",
     },
     { // primaryFilledSmallRounded
       variant: "primary",
@@ -39,19 +40,19 @@ export const buttonVariants = tv({
       variant: "secondary",
       mode: "outline",
       size: "large",
-      class: " ",
+      class: "text-gray-600",
     },
     { // primaryInactiveLargePill
       variant: "primary",
       mode: "inactive",
       size: "large",
-      class: " cursor-not-allowed",
+      class: "cursor-not-allowed",
     },
     { // secondaryOutlineSmallRounded
       variant: "secondary",
       mode: "outline",
       size: "small",
-      class: "",
+      class: "text-gray-600",
     },
     { // dangerOutlineLargePill
       variant: "danger",
