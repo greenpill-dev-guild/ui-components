@@ -1,0 +1,129 @@
+// FancyButton.stories.ts
+import * as React from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { Root as FancyButton, Icon as FancyButtonIcon } from './Base';
+import { buttonVariants } from '../Button/Base';
+
+import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
+import { Root, Icon } from './Base';
+
+
+const meta: Meta<typeof FancyButton> = {
+    title: 'Action/FancyButton', // Adjust to your preferred Storybook group/title
+    component: FancyButton,
+    parameters: {
+        layout: 'centered',
+        docs: {
+            description: {
+                component: 'A versatile FancyButton component with multiple variants and sizes.',
+            },
+        },
+    },
+    tags: ['autodocs'],
+    argTypes: {
+        onClick: { action: 'clicked' }, // or fn() if you prefer
+        children: {
+            control: 'text',
+            description: 'Button content',
+        },
+        variant: {
+            control: { type: 'select' },
+            options: ['neutral', 'primary', 'destructive', 'basic'],
+            description: 'Visual style of the button',
+        },
+        size: {
+            control: { type: 'select' },
+            options: ['medium', 'small', 'xsmall'],
+            description: 'Size of the button',
+        },
+    },
+} satisfies Meta<typeof FancyButton>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+/**
+ * Primary FancyButton Story
+ */
+export const Primary: Story = {
+    args: {
+        children: 'Next',
+        variant: 'primary',
+        size: 'medium',
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'The FancyButton in its primary variant.',
+            },
+        },
+    },
+};
+
+export const UploadImage: Story = {
+    args: {
+        children: 'Upload Image',
+        variant: 'basic',
+        size: 'medium',
+    },
+    parameters: {
+        docs: {
+            description: 'The success button variant with filled mode.',
+        },
+    },
+    render: (args) => (
+        <Root disabled={args.disabled} variant={args.variant} size={args.size}>
+            <Icon as={RiArrowLeftSLine} />
+            {args.children}
+            <Icon as={RiArrowRightSLine} />
+        </Root>
+    )
+};
+
+export const PrimaryInactiveLargePill: Story = {
+    args: {
+        // primaryInactiveLargePill
+        children: 'Review Work',
+        variant: 'primary',
+        size: 'medium',
+    },
+    parameters: {
+        docs: {
+            description: 'The danger button variant with filled mode.',
+        },
+    },
+    render: (args) => <FancyButton disabled {...args} />
+};
+
+
+
+export const DangerOutlineLargePill: Story = {
+    args: {
+        // dangerOutlineLargePill
+        // label: 'Reject',
+        variant: 'destructive',
+        // mode: 'outline',
+        // size: 'large',
+    },
+    parameters: {
+        docs: {
+            description: 'The button in small size.',
+        },
+    },
+};
+
+
+/**
+ *
+ * Default Variants
+ * - variant: neutral
+ * - size: medium
+ * 
+ * Type <> Variant
+ * Style <> State <> Mode
+ * Size <> Size
+ * 
+ * 
+ * 
+*/

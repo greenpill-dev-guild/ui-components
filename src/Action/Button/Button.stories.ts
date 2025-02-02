@@ -39,21 +39,6 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const PrimaryFilledLargePill: Story = {
-    args: {
-        // primaryFilledLargePill
-        label: 'Button',
-        variant: 'primary',
-        mode: 'filled',
-        size: 'large',
-    },
-    parameters: {
-        docs: {
-            description: 'The primary button variant with filled mode.',
-        },
-    },
-};
-
 export const PrimaryFilledSmallRounded: Story = {
     args: {
         // primaryFilledSmallRounded
@@ -65,36 +50,6 @@ export const PrimaryFilledSmallRounded: Story = {
     parameters: {
         docs: {
             description: 'The secondary button variant with stroke mode.',
-        },
-    },
-};
-
-export const SecondaryOutlineLargePill: Story = {
-    args: {
-        // secondaryOutlineLargePill
-        label: 'Button',
-        variant: 'secondary',
-        mode: 'outline',
-        size: 'large',
-    },
-    parameters: {
-        docs: {
-            description: 'The success button variant with filled mode.',
-        },
-    },
-};
-
-export const PrimaryInactiveLargePill: Story = {
-    args: {
-        // primaryInactiveLargePill
-        label: 'Button',
-        variant: 'primary',
-        mode: 'inactive',
-        size: 'large',
-    },
-    parameters: {
-        docs: {
-            description: 'The danger button variant with filled mode.',
         },
     },
 };

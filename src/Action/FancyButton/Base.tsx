@@ -45,7 +45,7 @@ export const fancyButtonVariants = tv({
     },
     size: {
       medium: {
-        root: 'h-10 gap-3 rounded-10 px-3.5',
+        root: 'h-10 gap-3 rounded-full px-3.5',
         icon: '-mx-1',
       },
       small: {
@@ -126,7 +126,7 @@ FancyButtonRoot.displayName = FANCY_BUTTON_ROOT_NAME;
 function FancyButtonIcon<T extends React.ElementType>({
   className,
   variant,
-  size,
+  size = 'xsmall',
   as,
   ...rest
 }: PolymorphicComponentProps<T, FancyButtonSharedProps>) {
