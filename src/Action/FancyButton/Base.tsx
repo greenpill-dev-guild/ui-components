@@ -49,11 +49,11 @@ export const fancyButtonVariants = tv({
         icon: '-mx-1',
       },
       small: {
-        root: 'h-9 gap-3 px-3 rouded-sm',
+        root: 'h-9 gap-3 px-3 rounded-lg',
         icon: '-mx-1',
       },
       xsmall: {
-        root: 'h-8 gap-3 px-2.5 rouded-sm',
+        root: 'h-8 gap-3 px-2.5 rounded-lg',
         icon: '-mx-1',
       },
     },

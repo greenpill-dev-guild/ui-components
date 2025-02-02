@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 import { Root as FancyButton, Icon as FancyButtonIcon } from './Base';
 import { buttonVariants } from '../Button/Base';
 
-import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine, RiImageFill, RiLoopLeftLine } from "@remixicon/react";
+import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine, RiDeleteBin6Fill, RiImageFill, RiLoopLeftLine } from "@remixicon/react";
 import { Root, Icon } from './Base';
 
 
@@ -116,7 +116,13 @@ export const DangerOutlineLargePill: Story = {
             description: 'The button in small size.',
         },
     },
-    render: (args) => <FancyButton as={RiArrowLeftSLine} {...args} />
+    render: (args) => (
+        <Root disabled={args.disabled} variant={args.variant} size={args.size}>
+            <Icon as={RiDeleteBin6Fill} />
+            {args.children}
+            {/* <Icon as={RiArrowRightSLine} /> */}
+        </Root>
+    )
 };
 
 export const SecondaryOutlineSmallRounded: Story = {
