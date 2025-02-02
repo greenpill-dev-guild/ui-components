@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 
-import { Button } from '.';
+import { Root as Button, Icon } from './Base';
 
 const meta: Meta<typeof Button> = {
     component: Button,
@@ -39,10 +39,10 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const PrimaryFilledSmallRounded: Story = {
+export const ApplyButton: Story = {
     args: {
         // primaryFilledSmallRounded
-        label: 'Button',
+        children: 'Apply',
         variant: 'primary',
         mode: 'filled',
         size: 'small',
@@ -54,41 +54,11 @@ export const PrimaryFilledSmallRounded: Story = {
     },
 };
 
-export const SecondaryOutlineSmallRounded: Story = {
-    args: {
-        // secondaryOutlineSmallRounded
-        label: 'Button',
-        variant: 'secondary',
-        mode: 'outline',
-        size: 'small',
-    },
-    parameters: {
-        docs: {
-            description: 'The outline button variant.',
-        },
-    },
-};
-
-export const DangerOutlineLargePill: Story = {
-    args: {
-        // dangerOutlineLargePill
-        label: 'Button',
-        variant: 'danger',
-        mode: 'outline',
-        size: 'large',
-    },
-    parameters: {
-        docs: {
-            description: 'The button in small size.',
-        },
-    },
-};
-
 export const DangerFilledSmallRounded: Story = {
     args: {
         // dangerFilledSmallRounded
-        label: 'Button',
-        variant: 'danger',
+        children: 'Cancel',
+        variant: 'error',
         mode: 'filled',
         size: 'small',
     },
@@ -101,29 +71,15 @@ export const DangerFilledSmallRounded: Story = {
 
 export const Loading: Story = {
     args: {
-        label: 'Loading',
+        children: 'Loading',
         variant: 'primary',
         mode: 'filled',
-        size: 'large',
-        loading: true,
+        size: 'medium',
+        // loading: true,
     },
     parameters: {
         docs: {
             description: 'The loading state of the button.',
-        },
-    },
-};
-
-export const WithIcon: Story = {
-    args: {
-        label: 'Icon',
-        variant: 'primary',
-        mode: 'filled',
-        size: 'large',
-    },
-    parameters: {
-        docs: {
-            description: 'The button with an icon.',
         },
     },
 };
