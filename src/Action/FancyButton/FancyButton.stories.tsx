@@ -8,6 +8,16 @@ import { buttonVariants } from '../Button/Base';
 import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine, RiDeleteBin6Fill, RiImageFill, RiLoopLeftLine, RiPlantFill } from "@remixicon/react";
 import { Root, Icon } from './Base';
 
+const icons = {
+    None: null,
+    ArrowLeft: <RiArrowLeftSLine />,
+    ArrowRight: <RiArrowRightSLine />,
+    Close: <RiCloseLine />,
+    Delete: <RiDeleteBin6Fill />,
+    Image: <RiImageFill />,
+    LoopLeft: <RiLoopLeftLine />,
+    Plant: <RiPlantFill />,
+};
 
 const meta: Meta<typeof FancyButton> = {
     title: 'Action/FancyButton', // Adjust to your preferred Storybook group/title
@@ -37,6 +47,16 @@ const meta: Meta<typeof FancyButton> = {
             options: ['medium', 'small', 'xsmall'],
             description: 'Size of the button',
         },
+        leadingIcon: {
+            control: { type: 'select' },
+            options: Object.keys(icons),
+            description: 'Icon to display at the start of the button',
+        },
+        trailingIcon: {
+            control: { type: 'select' },
+            options: Object.keys(icons),
+            description: 'Icon to display at the end of the button',
+        },
     },
 } satisfies Meta<typeof FancyButton>;
 
@@ -59,13 +79,19 @@ export const Primary: Story = {
             },
         },
     },
+    // render: (args) => (
+    //     <FancyButton {...args}>
+    //         {args.icon !== 'None' && icons[args.icon]}
+    //         {args.children}
+    //     </FancyButton>
+    // ),
     render: (args) => (
-        <Root disabled={args.disabled} variant={args.variant} size={args.size}>
-            {/* <Icon as={RiImageFill}/> */}
+        <FancyButton {...args}>
+            {args.leadingIcon !== 'None' && icons[args.leadingIcon]}
             {args.children}
-            <Icon as={RiArrowRightSLine} />
-        </Root>
-    )
+            {args.trailingIcon !== 'None' && icons[args.trailingIcon]}
+        </FancyButton>
+    ),
 
 };
 
