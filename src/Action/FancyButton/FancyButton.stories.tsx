@@ -5,7 +5,7 @@ import { fn } from '@storybook/test';
 import { Root as FancyButton, Icon as FancyButtonIcon } from './Base';
 import { buttonVariants } from '../Button/Base';
 
-import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine, RiDeleteBin6Fill, RiImageFill, RiLoopLeftLine } from "@remixicon/react";
+import { RiArrowLeftSLine, RiArrowRightSLine, RiCloseLine, RiDeleteBin6Fill, RiImageFill, RiLoopLeftLine, RiPlantFill } from "@remixicon/react";
 import { Root, Icon } from './Base';
 
 
@@ -69,6 +69,29 @@ export const Primary: Story = {
 
 };
 
+export const PrimaryAction: Story = {
+    args: {
+        children: 'Go Garden',
+        variant: 'primary',
+        size: 'medium',
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: 'The FancyButton in its primary variant.',
+            },
+        },
+    },
+    render: (args) => (
+        <Root disabled={args.disabled} variant={args.variant} size={args.size}>
+            <Icon as={RiPlantFill} />
+            {args.children}
+            {/* <Icon as={RiPlantFill} /> */}
+        </Root>
+    )
+
+};
+
 export const UploadImage: Story = {
     args: {
         children: 'Upload Image',
@@ -101,10 +124,18 @@ export const PrimaryInactiveLargePill: Story = {
             description: 'The danger button variant with filled mode.',
         },
     },
-    render: (args) => <FancyButton disabled {...args} />
+    render: (args) => (
+        <Root disabled variant={args.variant} size={args.size}>
+            {/* <Icon as={RiArrowRightSLine} /> */}
+            {args.children}
+            <Icon as={RiArrowRightSLine} />
+        </Root>
+
+    )
+
 };
 
-export const DangerOutlineLargePill: Story = {
+export const DestructiveMedium: Story = {
     args: {
         // dangerOutlineLargePill
         children: 'Reject',
@@ -120,7 +151,7 @@ export const DangerOutlineLargePill: Story = {
         <Root disabled={args.disabled} variant={args.variant} size={args.size}>
             <Icon as={RiDeleteBin6Fill} />
             {args.children}
-            {/* <Icon as={RiArrowRightSLine} /> */}
+            <Icon as={RiArrowRightSLine} />
         </Root>
     )
 };
@@ -132,6 +163,21 @@ export const SecondaryOutlineSmallRounded: Story = {
         variant: 'basic',
         // mode: 'stroke',
         size: 'small',
+    },
+    parameters: {
+        docs: {
+            description: 'The outline button variant.',
+        },
+    },
+};
+
+export const XsPrimary: Story = {
+    args: {
+        // secondaryOutlineSmallRounded
+        children: 'View Details',
+        variant: 'primary',
+        // mode: 'stroke',
+        size: 'xsmall',
     },
     parameters: {
         docs: {

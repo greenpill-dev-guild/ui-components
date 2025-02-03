@@ -60,20 +60,38 @@ export const fancyButtonVariants = tv({
   },
   compoundVariants: [
     {
-      variant: ['neutral', 'primary', 'destructive'],
+      variant: ['neutral', 'primary'],
       class: {
         root: [
-          // before
+          // before styles
           'before:pointer-events-none before:absolute before:inset-0 before:z-10 before:rounded-[inherit]',
           'before:bg-gradient-to-b before:p-px',
           'before:from-static-white/[.12] before:to-transparent',
           // before mask
           'before:[mask-clip:content-box,border-box] before:[mask-composite:exclude] before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)]',
-          // after
+          // after styles
           'after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:from-static-white after:to-transparent',
           'after:pointer-events-none after:opacity-[.16] after:transition after:duration-200 after:ease-out',
           // hover
           'hover:after:opacity-[.24]',
+        ],
+      },
+    },
+    {
+      variant: ['destructive'],
+      size: ['medium'],
+      class: {
+        root: [
+          // existing common styles
+          'before:pointer-events-none before:absolute before:inset-0 before:z-10 before:rounded-[inherit]',
+          'before:bg-gradient-to-b before:p-px',
+          'before:from-static-white/[.12] before:to-transparent',
+          'before:[mask-clip:content-box,border-box] before:[mask-composite:exclude] before:[mask-image:linear-gradient(#fff_0_0),linear-gradient(#fff_0_0)]',
+          'after:absolute after:inset-0 after:rounded-[inherit] after:bg-gradient-to-b after:from-static-white after:to-transparent',
+          'after:pointer-events-none after:opacity-[.16] after:transition after:duration-200 after:ease-out',
+          'hover:after:opacity-[.24]',
+          // add specific style for medium destructive buttons
+          'rounded-md'
         ],
       },
     },

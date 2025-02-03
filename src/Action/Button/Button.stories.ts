@@ -54,12 +54,12 @@ export const ApplyButton: Story = {
     },
 };
 
-export const DangerFilledSmallRounded: Story = {
+export const RejectButton: Story = {
     args: {
         // dangerFilledSmallRounded
-        children: 'Cancel',
+        children: 'Reject',
         variant: 'error',
-        mode: 'filled',
+        mode: 'stroke',
         size: 'small',
     },
     parameters: {
@@ -67,19 +67,26 @@ export const DangerFilledSmallRounded: Story = {
             description: 'The button in large size.',
         },
     },
+    // render: (args) => (
+    //     <Root disabled={args.disabled} variant={args.variant} size={args.size}>
+    //         <Icon as={RiImageFill} />
+    //         {args.children}
+    //         <Icon as={RiArrowRightSLine} />
+    //     </Root>
+    // )
 };
 
-export const Loading: Story = {
+export const DangerFilledSmallRounded: Story = {
     args: {
-        children: 'Loading',
-        variant: 'primary',
-        mode: 'filled',
-        size: 'medium',
-        // loading: true,
+        // dangerFilledSmallRounded
+        children: 'Cancel',
+        variant: 'neutral',
+        mode: 'stroke',
+        size: 'small',
     },
     parameters: {
         docs: {
-            description: 'The loading state of the button.',
+            description: 'The button in large size.',
         },
     },
 };
